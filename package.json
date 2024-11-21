@@ -3,7 +3,7 @@
   "version": "v1.0.0",
   "description": "",
   "author": "Simja",
-  "main": "main.js",
+  "main": "./src/main/main.js",
   "scripts": {
     "dev": "electron .",
     "app:dir": "electron-builder --dir",
@@ -13,7 +13,7 @@
     "make": "electron-forge make"
   },
   "build": {
-    "appId": "com.simjasproyects.com",
+    "appId": "com.simjasprojects.com",
     "productName": "Generate Tags App",
     "win": {
       "sign": false,
@@ -42,11 +42,12 @@
   "license": "ISC",
   "devDependencies": {
     "electron": "^26.6.10",
-    "standard": "^17.1.2",
-    "electron-builder": "^25.1.8"
+    "electron-builder": "^25.1.8",
+    "standard": "^17.1.2"
   },
   "dependencies": {
-    "electron-updater": "^6.3.9"
+    "electron-updater": "^6.3.9",
+    "materialize-css": "1.0.0-rc.2"
   },
   "eslintConfig": {
     "extends": "standard"

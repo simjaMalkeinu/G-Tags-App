@@ -1,0 +1,54 @@
+{
+  "name": "tags-app-electron",
+  "version": "v1.0.0",
+  "description": "",
+  "author": "Simja",
+  "main": "main.js",
+  "scripts": {
+    "dev": "electron .",
+    "app:dir": "electron-builder --dir",
+    "app:dist": "electron-builder",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "build": {
+    "appId": "com.simjasproyects.com",
+    "productName": "Generate Tags App",
+    "win": {
+      "sign": false,
+      "target": "nsis-web"
+    },
+    "directories": {
+      "output": "dist"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "releaseType": "release",
+        "owner": "simjaMalkeinu",
+        "repo": "G-Tags-App"
+      }
+    ]
+  },
+  "publish": {
+    "provider": "generic",
+    "url": "https://github.com/simjaMalkeinu/G-Tags-App"
+  },
+  "appUpdater": {
+    "dev": true
+  },
+  "keywords": [],
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^26.6.10",
+    "standard": "^17.1.2",
+    "electron-builder": "^25.1.8"
+  },
+  "dependencies": {
+    "electron-updater": "^6.3.9"
+  },
+  "eslintConfig": {
+    "extends": "standard"
+  }
+}

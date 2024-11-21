@@ -17,8 +17,17 @@
 <body>
   <div class="container">
     <h1 class="center-align">GENERADOR DE ETIQUETAS</h1>
-    <button class="waves-effect waves-light btn" id="checkUpdatesButton">Comprobar Actualizaciones</button>
-    <div id="updateStatus">Estado: Esperando...</div>
+
+    <div class="center-align">
+      <div id="updateStatus"><b>Estado: Esperando...</b>
+      </div>
+      <p id="percentage"></p>
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
+    </div>
+
+    <p id="info"></p>
   </div>
 
   <!-- Importa Materialize JS -->

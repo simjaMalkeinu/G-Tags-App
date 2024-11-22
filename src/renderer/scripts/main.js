@@ -14,6 +14,16 @@ window.electron.onStatusDownload((event, status) => {
 })
 
 const updateOnlineStatus = () => {
+  const circle = document.getElementById('status')
+
+  if (navigator.onLine) {
+    circle.classList.remove('px-3')
+    circle.classList.add('px-2.5')
+  } else {
+    circle.classList.remove('px-2.5')
+    circle.classList.add('px-3')
+  }
+
   document.getElementById('status-icon').innerHTML = navigator.onLine
     ? '<i class="fa-solid fa-wifi"></i>'
     : '<i class="fa-solid fa-triangle-exclamation"></i>'

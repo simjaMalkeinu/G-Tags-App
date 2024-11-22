@@ -1,17 +1,40 @@
+/* Resetear márgenes y padding */
 * {
     padding: 0;
     margin: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
-body {
-    width: 100dvw;
-    height: 100dvh;
-    background-color: #c4c4c4;
+/* Ajustes personalizados */
+.icon-app i {
+    margin-right: 8px;
+}
+
+/* Centrar los íconos cuando el sidebar es pequeño */
+.icon-centered {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
 
-aside {
-    width: 150px;
-    height: 100%;
-    background-color: #296790;
+.page-route {
+    display: none;
+    padding: 20px;
+}
+
+.active {
+    display: block;
+    animation: slideIn 0.5s;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(50%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
 }

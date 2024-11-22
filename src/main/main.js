@@ -1,4 +1,5 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
+const { autoUpdater } = require('electron-updater')
 const path = require('path')
 const routes = require('./config/routes') // Archivo que define las rutas
 const setupAutoUpdater = require('./config/autoUpdater') // Importa la configuración de autoUpdater
@@ -17,6 +18,12 @@ function createMainWindow () {
 
   mainWindow.loadFile(path.join(__dirname, routes.index))
 }
+
+// Escucha el evento para iniciar la búsqueda de actualizaciones
+ipcMain.on('check-for-updates', () => {
+  console.log('Buscando actualizaciones...')
+  autoUpdater.checkForUpdatesAndNotify()
+})
 
 app.whenReady().then(() => {
   createMainWindow()

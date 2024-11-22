@@ -9,6 +9,7 @@ function setupAutoUpdater (mainWindow, app) {
   // Eventos de autoUpdater
   autoUpdater.on('checking-for-update', () => {
     console.log('Checking for updates...')
+    mainWindow.webContents.send('update-status', 'Buscando actualizaciones...')
   })
 
   // Evento para notificar que hay una actualización disponible
@@ -71,21 +72,16 @@ function setupAutoUpdater (mainWindow, app) {
 
   autoUpdater.on('update-not-available', () => {
     console.log('Update not available')
-    mainWindow.webContents.send('update-status', 'No hay actualizaciones.')
+    mainWindow.webContents.send(
+      'update-status',
+      'No hay actualizaciones disponibles.'
+    )
   })
 
   autoUpdater.on('error', error => {
     console.error('Error updating:', error)
     mainWindow.webContents.send('update-status', `Error: ${error.message}`)
   })
-
-  mainWindow.webContents.send(
-    'update-status',
-    `Checking for updates. Current version ${app.getVersion()}`
-  )
-
-  // Inicia la búsqueda de actualizaciones
-  autoUpdater.checkForUpdatesAndNotify()
 }
 
 module.exports = setupAutoUpdater

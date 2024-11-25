@@ -1,6 +1,6 @@
 {
   "name": "tags-app-electron",
-  "version": "v1.0.2",
+  "version": "v1.0.3",
   "description": "",
   "author": "Simja",
   "main": "./src/main/main.js",
@@ -51,7 +51,8 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.1",
-    "electron-updater": "^6.3.9"
+    "electron-updater": "^6.3.9",
+    "sqlite3": "^5.1.7"
   },
   "eslintConfig": {
     "extends": "standard"

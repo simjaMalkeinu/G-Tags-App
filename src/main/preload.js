@@ -22,3 +22,8 @@ contextBridge.exposeInMainWorld('versions', {
 contextBridge.exposeInMainWorld('electronAPI', {
   setTitle: (title) => ipcRenderer.send('set-title', title)
 })
+
+contextBridge.exposeInMainWorld('databaseAPI', {
+  getRecords: () => ipcRenderer.invoke('db:getRecords'),
+  addRecord: (record) => ipcRenderer.invoke('db:addRecord', record)
+})

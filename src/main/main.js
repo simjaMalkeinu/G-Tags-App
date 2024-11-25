@@ -4,6 +4,8 @@ const path = require('path')
 const routes = require('./config/routes') // Archivo que define las rutas
 const setupAutoUpdater = require('./config/autoUpdater') // Importa la configuración de autoUpdater
 
+const db = require('../database/db')
+
 let mainWindow
 
 function createMainWindow () {
@@ -25,6 +27,11 @@ function createMainWindow () {
 ipcMain.on('check-for-updates', () => {
   console.log('Buscando actualizaciones...')
   autoUpdater.checkForUpdatesAndNotify()
+})
+
+// Manejar consultas desde el renderizador
+ipcMain.handle('db:getRecords', () => {
+  return db.obtenerRegistros()
 })
 
 app.whenReady().then(() => {

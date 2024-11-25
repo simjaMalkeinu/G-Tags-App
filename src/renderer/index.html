@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Slider Toggle App</title>
+  <title>Generador de etiquetas</title>
 
   <!-- Importar Tailwind -->
   <link rel="stylesheet" href="./styles/output.css">
@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="./styles/main.css">
 </head>
 
-<body class="flex h-screen bg-gray-100">
+<body class="flex h-screen bg-gray-100 text-gray-800">
 
   <!-- Sidebar -->
   <aside id="sidebar"
@@ -31,16 +31,19 @@
     </div>
 
     <!-- Menú del slider -->
-    <nav class="flex-grow flex flex-col items-center gap-6 mt-4 w-full">
-      <a href="#" data-route="generateTag" class="flex gap-2 w-4/5 px-4 py-2 hover:bg-gray-700 rounded transition-all">
+    <nav class=" flex flex-col items-center gap-6 mt-4 w-full">
+      <a href="#" data-route="generateTag" title-route="Generar etiquetas"
+        class="flex gap-2 w-4/5 px-4 py-2 hover:bg-gray-700 rounded transition-all">
         <i class="fa-solid fa-tags text-xl sidebar-icon"></i>
         <b class="sidebar-text text-sm">Generar etiqueta</b>
       </a>
-      <a href="#" data-route="readTag" class="flex gap-2 w-4/5 px-4 py-2 hover:bg-gray-700 rounded transition-all">
+      <a href="#" data-route="readTag" title-route="Modificar una etiqueta"
+        class="flex gap-2 w-4/5 px-4 py-2 hover:bg-gray-700 rounded transition-all">
         <i class="fa-solid fa-pen-to-square text-xl sidebar-icon"></i>
         <b class="sidebar-text text-sm">Leer etiqueta</b>
       </a>
-      <a href="#" data-route="historial" class="flex gap-2 w-4/5 px-4 py-2 hover:bg-gray-700 rounded transition-all">
+      <a href="#" data-route="historial" title-route="Historial de etiquetas"
+        class="flex gap-2 w-4/5 px-4 py-2 hover:bg-gray-700 rounded transition-all">
         <i class="fa-solid fa-book text-xl sidebar-icon"></i>
         <b class="sidebar-text text-sm">Historial</b>
       </a>
@@ -48,31 +51,184 @@
   </aside>
 
   <!-- Contenido principal -->
-  <main class="flex flex-col flex-grow p-6 bg-white gap-2">
-    <header class="flex justify-between items-center">
+  <main class="flex flex-col flex-grow p-6 bg-slate-100 gap-2 overflow-auto">
+    <header class="flex justify-between items-center sticky">
       <!-- Botón para alternar tamaño -->
       <button id="toggle-btn" class="px-4 py-2 bg-gray-700 hover:bg-blue-500 rounded text-white">
         <!-- <i class="fa-solid fa-bars"></i> -->
         <i class="fa-solid fa-arrow-left" id="icon-menu"></i>
       </button>
 
-      <h1 class="uppercase"><b>Generar etiquetas</b></h1>
+      <h1 class="uppercase"><b id="page-title">Generar etiquetas</b></h1>
 
-      <div id="status" class="status bg-slate-400 rounded-full py-2 grid place-items-center">
-        <strong id="status-icon"></strong>
-        <p id="status-text">Online</p>
+      <div id="status"
+        class="status bg-slate-400 text-white rounded-full py-2 px-4 grid place-items-center space-y-1 shadow-md w-16 h-16">
+        <strong id="status-icon" class="text-lg">
+          <i class="fa-solid fa-signal"></i>
+        </strong>
+        <p id="status-text" class="text-xs font-semibold">Online</p>
       </div>
+
+
     </header>
     <div class="flex-1">
-      <div id="generateTag" class="page-route active">Welcome to the Home page!</div>
-      <div id="readTag" class="page-route">This is the About page.</div>
-      <div id="historial" class="page-route">Here is the Contact page.</div>
+      <div id="generateTag" class="page-route active">
+
+        <div class="flex space-x-4 items-center mb-2">
+          <!-- Dropdown Planta -->
+          <div class="relative">
+            <label for="dropdown-planta" class="block text-sm font-medium text-gray-700">Planta</label>
+            <select id="dropdown-planta"
+              class="mt-1 block w-48 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-3 pl-2">
+              <option value="">Selecciona una planta</option>
+              <option value="1">Planta 1</option>
+              <option value="2">Planta 2</option>
+              <option value="3">Planta 3</option>
+            </select>
+          </div>
+
+          <!-- Dropdown Área -->
+          <div class="relative">
+            <label for="dropdown-area" class="block text-sm font-medium text-gray-700">Área</label>
+            <select id="dropdown-area"
+              class="mt-1 block w-48 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-3 pl-2">
+              <option value="">Selecciona un área</option>
+              <option value="produccion">Producción</option>
+              <option value="mantenimiento">Mantenimiento</option>
+              <option value="calidad">Calidad</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <form id="f-generate" class="bg-white shadow-md rounded px-8 pt-6 pb-8 flex-1 min-w-[401px]">
+            <div class="mb-4">
+              <label class="block text-gray-800 text-sm font-bold mb-2" for="username">
+                Numero de parte
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="username" type="text" placeholder="Enter your username" />
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-800 text-sm font-bold mb-2" for="username">
+                Lote
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="username" type="text" placeholder="Enter your username" />
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-800 text-sm font-bold mb-2" for="username">
+                Cantidad total
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="username" type="text" placeholder="Enter your username" />
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-800 text-sm font-bold mb-2" for="username">
+                cantidad por caja
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="username" type="text" placeholder="Enter your username" />
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-800 text-sm font-bold mb-2" for="username">
+                Operacion
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="username" type="text" placeholder="Enter your username" />
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-800 text-sm font-bold mb-2" for="username">
+                Username
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="username" type="text" placeholder="Enter your username" />
+            </div>
+            <div class="mb-6">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                Password
+              </label>
+              <input
+                class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                id="password" type="password" placeholder="******************" />
+            </div>
+            <div class="flex items-center justify-between">
+              <button
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="button">
+                Sign In
+              </button>
+            </div>
+          </form>
+
+          <div class="max-w-xl max-h-64 min-w-[430px] mx-auto bg-white border border-gray-200 shadow-md rounded p-4 flex flex-wrap items-center">
+            <!-- Información a la izquierda -->
+            <h2 class="text-lg font-semibold text-gray-700 w-full">Etiqueta de Material</h2>
+            <div class="flex-1">
+              <ul class="mt-2 space-y-1 text-sm text-gray-600">
+                <li><strong>Material:</strong> Acero Inoxidable</li>
+                <li><strong>Código:</strong> 12345-AB</li>
+                <li><strong>Cantidad:</strong> 25 piezas</li>
+                <li><strong>Ubicación:</strong> Almacén A3</li>
+              </ul>
+            </div>
+
+            <!-- QR a la derecha -->
+            <div class="flex-shrink-0">
+              <div class="w-40 h-40 p-2 bg-gray-100 border border-gray-300 rounded-lg grid place-items-center">
+                <!-- Contenedor del QR -->
+                <canvas id="qr-code" class="w-full h-full"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div id="readTag" class="page-route">
+        <form id="f-edit" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+              Username
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="username" type="text" placeholder="Enter your username" />
+          </div>
+          <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+              Password
+            </label>
+            <input
+              class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="password" type="password" placeholder="******************" />
+          </div>
+          <div class="flex items-center justify-between">
+            <button
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="button">
+              Sign In
+            </button>
+          </div>
+        </form>
+
+      </div>
+      <div id="historial" class="page-route">
+        <h1>Here is the Hostory page.</h1>
+        <button id="btn-get-historial">Obtener historial</button>
+      </div>
     </div>
   </main>
 
   <!-- Scripts -->
-  <script src="./scripts/main.js" defer></script>
-  <script src="./scripts/aside.js" defer></script>
+  <script src="./scripts/renderer.js" defer></script>
+  <script src="./scripts/db.js" defer></script>
+  <script type="module" src="./scripts/workSpace.js" defer></script>
 </body>
 
 </html>

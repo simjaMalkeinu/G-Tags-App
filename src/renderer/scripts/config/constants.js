@@ -1,41 +1,41 @@
 import { getJulianDate } from '../functions/julianDate.js'
 
 export const OPV1 = [
-  { valor: 'HYP', texto: 'ALMACEN DE HYP' },
-  { valor: 'VU1', texto: 'VULCANIZADO' },
-  { valor: 'REB', texto: 'REBABEO' },
-  { valor: 'LFL', texto: 'LINEA FINAL' },
-  { valor: 'PIN', texto: 'PINTURA' },
-  { valor: 'ENS', texto: 'ENSAMBLE' },
-  { valor: 'CL1', texto: 'CALIDAD' }
+  { valor: 'HYP', texto: 'Almacen de HYP' },
+  { valor: 'VU1', texto: 'Vulcanizado' },
+  { valor: 'REB', texto: 'Rebabeo' },
+  { valor: 'LFL', texto: 'Linea final' },
+  { valor: 'PIN', texto: 'Pintura' },
+  { valor: 'ENS', texto: 'Ensamble' },
+  { valor: 'CL1', texto: 'Calidad' }
 ]
 
 export const OPV2 = [
-  { valor: 'AV2', texto: 'ALMACEN DE V2' },
-  { valor: 'VU2', texto: 'VULCANIZADO' },
-  { valor: 'EN2', texto: 'ENSAMBLE' }
+  { valor: 'AV2', texto: 'Almacen de V2' },
+  { valor: 'VU2', texto: 'Vulcanizado' },
+  { valor: 'EN2', texto: 'Ensamble' }
 ]
 
 export const OPCA = [
-  { valor: 'HYT', texto: 'ALMACEN DE HYT' },
-  { valor: 'TOR', texto: 'TORNOS' },
-  { valor: 'TRO', texto: 'TROQUELADO' },
-  { valor: 'DES', texto: 'DESENGRASE' },
-  { valor: 'FOS', texto: 'FOSFATADO' },
-  { valor: 'ENC', texto: 'ENCEMENTADO' }
+  { valor: 'HYT', texto: 'Almacen HYT' },
+  { valor: 'TOR', texto: 'Tornos' },
+  { valor: 'TRO', texto: 'Troquelado' },
+  { valor: 'DES', texto: 'Desengrase' },
+  { valor: 'FOS', texto: 'Fosfatado' },
+  { valor: 'ENC', texto: 'Encementado' }
 ]
 
 export const OPHU = [
-  { valor: 'AHU', texto: 'ALMACEN DE HULES' },
-  { valor: 'HUL', texto: 'HULES' },
-  { valor: 'CL2', texto: 'CALIDAD' }
+  { valor: 'AHU', texto: 'Almacen de hules' },
+  { valor: 'HUL', texto: 'Hules' },
+  { valor: 'CL2', texto: 'Calidad' }
 ]
 
 // Valores predeterminados para el localStorage
 export const defaultValues = {
   Invoice: 0, // Valor predeterminado para el último folio
   day: getJulianDate(new Date()), // Fecha predeterminada
-  area: 'General', // Área predeterminada
-  planta: 'Principal', // Planta predeterminada
+  area: 'HYP', // Área predeterminada
+  planta: 'V1', // Planta predeterminada
   isSmall: false
 }

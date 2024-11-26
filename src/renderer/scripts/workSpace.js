@@ -1,8 +1,10 @@
 import { initializeSidebar } from './components/slide/sidebar.model.js'
 import { initializeNavigation } from './components/navigation/navigation.model.js'
+import { initializePlace } from './components/place/place.js'
 
 import { defaultValues } from './config/constants.js'
 import { getLocalStorage } from './config/storage.js'
+import { initializeEvents } from './components/events/events.js'
 
 document.addEventListener('DOMContentLoaded', () => {
   const storageData = getLocalStorage(defaultValues)
@@ -10,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initializeSidebar()
   initializeNavigation()
+  initializePlace(storageData.planta, storageData.area)
 
-  // document.getElementById('area').value = storageData.area
-  // document.getElementById('planta').value = storageData.planta
+  initializeEvents()
 })

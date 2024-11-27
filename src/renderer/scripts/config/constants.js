@@ -1,5 +1,3 @@
-import { getJulianDate } from '../functions/julianDate.js'
-
 export const OPV1 = [
   { valor: 'HYP', texto: 'Almacen de HYP' },
   { valor: 'VU1', texto: 'Vulcanizado' },
@@ -33,9 +31,10 @@ export const OPHU = [
 
 // Valores predeterminados para el localStorage
 export const defaultValues = {
-  Invoice: 0, // Valor predeterminado para el último folio
-  day: getJulianDate(new Date()), // Fecha predeterminada
+  invoice: 0, // Valor predeterminado para el último folio
   area: 'HYP', // Área predeterminada
   planta: 'V1', // Planta predeterminada
-  isSmall: false
+  isSmall: false,
+  julDay: '0',
+  day: '01/01/2024'
 }

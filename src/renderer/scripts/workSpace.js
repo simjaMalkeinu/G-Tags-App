@@ -3,16 +3,18 @@ import { initializeNavigation } from './components/navigation/navigation.model.j
 import { initializePlace } from './components/place/place.js'
 
 import { defaultValues } from './config/constants.js'
-import { getLocalStorage } from './config/storage.js'
+import { configureStorage, getLocalStorage } from './config/storage.js'
 import { initializeEvents } from './components/events/events.js'
 
-document.addEventListener('DOMContentLoaded', () => {
-  const storageData = getLocalStorage(defaultValues)
+document.addEventListener('DOMContentLoaded', async () => {
+  await configureStorage(defaultValues)
+
+  const storageData = getLocalStorage()
   console.log(storageData)
 
   initializeSidebar()
   initializeNavigation()
-  initializePlace(storageData.planta, storageData.area)
+  initializePlace(storageData.plant, storageData.area)
 
   initializeEvents()
 })

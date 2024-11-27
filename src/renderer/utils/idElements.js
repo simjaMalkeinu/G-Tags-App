@@ -1,0 +1,20 @@
+export default {
+  id_f_generate: 'f-generate',
+  id_f_edit: 'f-edit',
+  id_btn_expdate: 'switch-activate-expiration-date',
+  id_btn_recdate: 'switch-activate-print-date',
+  id_btn_secuence: 'switch-activate-secuence',
+  id_btn_autoLot: 'btn-generate-lot',
+  id_e_recdate: 'input-date-reception',
+  id_e_expdate: 'input-expiration-date',
+  id_e_secuence: 'input-secuence',
+  id_e_operation: 'e-operation',
+  id_e_secCont: 'e-secuence',
+  id_e_date: 'e-date',
+  id_e_shift: 'e-shift',
+  id_e_reception: 'e-reception',
+  id_c_qr: 'qr-code',
+  id_msg_numPart: 'msg-num-part',
+  id_msg_lot: 'msg-lot',
+  id_msg_operation: 'msg-operation'
+}

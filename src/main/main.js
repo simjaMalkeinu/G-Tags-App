@@ -34,6 +34,11 @@ ipcMain.handle('db:getRecords', () => {
   return db.obtenerRegistros()
 })
 
+// Manejador para enviar la fecha actual
+ipcMain.handle('get-current-date', () => {
+  return new Date().toISOString() // Envía la fecha en formato ISO
+})
+
 app.whenReady().then(() => {
   createMainWindow()
 

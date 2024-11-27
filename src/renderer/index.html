@@ -117,14 +117,16 @@
                 Numero de parte
               </label>
               <input
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1"
                 id="g-num-part" type="text" placeholder="Enter a number part" />
+                <span id="msg-num-part" class="pr-2"></span>
             </div>
 
             <!-- generar lote -->
             <div class="flex gap-2 mb-2 flex-wrap">
+              <!-- Custom Lote -->
               <!-- Fecha del lote -->
-              <div>
+              <div id="e-date">
                 <label class="block text-gray-800 text-sm font-bold mb-2" for="g-date-lot">
                   Fecha del lote
                 </label>
@@ -134,14 +136,14 @@
               </div>
 
               <!-- Turno -->
-              <div>
+              <div id="e-shift">
                 <label class="block text-gray-800 text-sm font-bold mb-2" for="g-turn">
                   Turno
                 </label>
                 <select
                   class="shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="g-turn">
-                  <option value="A">A</option>
+                  <option value="A" selected>A</option>
                   <option value="B">B</option>
                   <option value="C">C</option>
                   <option value="D">D</option>
@@ -158,8 +160,10 @@
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="g-lot" type="text" placeholder="121224A" disabled />
                 </div>
+                <span id="msg-lot"></span>
                 <button id="btn-generate-lot"
-                  class="w-full max-w-[220px] px-6 py-2 text-sm font-medium text-gray-500 border-gray-400  rounded-md hover:bg-gray-800 hover:text-white hover:border-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transition h-min border-2">
+                  class="w-full max-w-[220px] px-6 py-2 text-sm font-medium text-gray-500 border-gray-400  rounded-md hover:bg-gray-800 hover:text-white hover:border-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transition h-min border-2"
+                  type="button">
                   Lote Automático
                 </button>
 
@@ -167,23 +171,42 @@
             </div>
 
             <!-- Operacion -->
-            <div class="mb-4">
+            <div class="mb-4" id="e-operation">
               <label class="block text-gray-800 text-sm font-bold mb-2" for="g-operation">
                 Operacion
               </label>
               <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="g-operation" type="text" placeholder="Enter a operacion (10,20,30,40,...)" />
+                <span id="msg-operation"></span>
             </div>
 
-            <!-- Cantidad total de piezas  -->
-            <div class="mb-4">
-              <label class="block text-gray-800 text-sm font-bold mb-2" for="g-total-quantity">
-                Cantidad total de piezas
-              </label>
-              <input
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="g-total-quantity" type="text" placeholder="Enter the total quantity" />
+            <div class="flex flex-wrap gap-2 mb-4">
+              <!-- Cantidad total de piezas  -->
+              <div>
+                <label class="block text-gray-800 text-sm font-bold mb-2" for="g-total-quantity">
+                  Cantidad total de piezas
+                </label>
+                <input
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="g-total-quantity" type="text" placeholder="Enter the total quantity" />
+              </div>
+
+              <!-- Unidad -->
+              <div>
+                <label class="block text-gray-800 text-sm font-bold mb-2" for="g-unit">
+                  Tipo
+                </label>
+                <select
+                  class="shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="g-unit">
+                  <option value="PZ" selected>Piezas</option>
+                  <option value="LT">Litros</option>
+                  <option value="KG">Kilos</option>
+                  <option value="MT">Metros</option>
+                  <option value="TR">Tiras</option>
+                </select>
+              </div>
             </div>
 
             <!-- Cantidad de piezas estandar por contenedor  -->
@@ -194,35 +217,6 @@
               <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="g-standar" type="text" placeholder="Enter the standar" />
-            </div>
-
-
-
-
-            <!-- Activar fecha de recepcion  -->
-            <div class="mb-4">
-              <div class="flex items-center gap-3">
-                <label for="switch-activate-print-date" class="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" id="switch-activate-print-date" class="sr-only peer" />
-                  <div
-                    class="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-white rounded-full peer-checked:bg-gray-800">
-                  </div>
-                  <div
-                    class="absolute left-1 top-1 w-4 h-4 bg-white border border-gray-300 rounded-full transition-transform peer-checked:translate-x-5 peer-checked:border-gray-800">
-                  </div>
-                </label>
-                <span class="text-sm font-medium text-gray-700">Incluir fecha de recepcion</span>
-              </div>
-            </div>
-
-            <!-- fecha de recepcion -->
-            <div id="input-date-reception" class="mb-4" hidden>
-              <label class="block text-gray-800 text-sm font-bold mb-2" for="g-total-quantity">
-                Fecha de recepcion
-              </label>
-              <input
-                class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="g-date-reception" type="date" placeholder="Enter the total quantity" />
             </div>
 
             <!-- Activar caducidad -->
@@ -242,8 +236,8 @@
             </div>
 
             <!-- Caducidad  -->
-            <div id="input-expiration-date" class="mb-4" hidden>
-              <label class="block text-gray-800 text-sm font-bold mb-2" for="g-total-quantity">
+            <div id="input-expiration-date" class="mb-4 transition" hidden>
+              <label class="block text-gray-800 text-sm font-bold mb-2" for="g-expiration-date">
                 Caducidad
               </label>
               <div class="flex">
@@ -255,6 +249,63 @@
               </div>
             </div>
 
+            <div id="e-reception" hidden>
+              <!-- Activar fecha de recepcion  -->
+            <div class="mb-4">
+              <div class="flex items-center gap-3">
+                <label for="switch-activate-print-date" class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" id="switch-activate-print-date" class="sr-only peer" />
+                  <div
+                    class="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-white rounded-full peer-checked:bg-gray-800">
+                  </div>
+                  <div
+                    class="absolute left-1 top-1 w-4 h-4 bg-white border border-gray-300 rounded-full transition-transform peer-checked:translate-x-5 peer-checked:border-gray-800">
+                  </div>
+                </label>
+                <span class="text-sm font-medium text-gray-700">Incluir fecha de recepcion</span>
+              </div>
+            </div>
+
+            <!-- fecha de recepcion -->
+            <div id="input-date-reception" class="mb-4 transition" hidden>
+              <label class="block text-gray-800 text-sm font-bold mb-2" for="g-reception-date">
+                Fecha de recepcion
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="g-reception-date" type="date" placeholder="Enter the total quantity" />
+            </div>
+            </div>
+
+            <div id="e-secuence" hidden>
+              <!-- Activar secuencia de etiquetado -->
+              <div class="mb-4">
+                <div class="flex items-center gap-3">
+                  <label for="switch-activate-secuence" class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="switch-activate-secuence" class="sr-only peer" />
+                    <div
+                      class="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-white rounded-full peer-checked:bg-gray-800">
+                    </div>
+                    <div
+                      class="absolute left-1 top-1 w-4 h-4 bg-white border border-gray-300 rounded-full transition-transform peer-checked:translate-x-5 peer-checked:border-gray-800">
+                    </div>
+                  </label>
+                  <span class="text-sm font-medium text-gray-700">Incluir secuencia de etiquetado</span>
+                </div>
+              </div>
+
+              <!-- secuencia de etiquetado  -->
+              <div id="input-secuence" class="mb-4 transition" hidden>
+                <label class="block text-gray-800 text-sm font-bold mb-2" for="g-secuence">
+                  Observaciones adicionales
+                </label>
+                <input
+                  class="shadow appearance-none border rounded w-full min-w-16 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="g-secuence" type="text" placeholder="Caduca en:" />
+              </div>
+            </div>
+
+            <!-- Botones de formulario -->
             <div class="flex items-center justify-start gap-4">
               <!-- Boton para generar -->
               <button
@@ -289,7 +340,7 @@
             <div class="flex-shrink-0">
               <div class="w-44 h-44 p-2 bg-gray-100 border border-gray-300 rounded-lg grid place-items-center">
                 <!-- Contenedor del QR -->
-                <canvas id="qr-code" class="w-full h-full"></canvas>
+                <div id="qr-code" class="w-full h-full"></div>
               </div>
             </div>
           </div>
@@ -335,6 +386,9 @@
   <script src="./scripts/materialize/materialize.min.js"></script>
   <script src="./scripts/renderer.js" defer></script>
   <script src="./scripts/db.js" defer></script>
+
+  <!-- Libraries -->
+  <script src="./scripts/libraries/qrcode.min.js"></script>
   <script type="module" src="./scripts/workSpace.js" defer></script>
 </body>
 

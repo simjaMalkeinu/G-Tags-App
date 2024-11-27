@@ -4,7 +4,7 @@ export const activateView = (id = '') => {
 
 export const vinculateSwitch = (btn, view) => {
   document.getElementById(btn).addEventListener('input', () => {
-    console.log('activating the expiration date')
+    // console.log('activating the expiration date')
     activateView(view)
   })
 }

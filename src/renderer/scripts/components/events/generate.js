@@ -7,7 +7,7 @@ import {
   validateSecuence
 } from '../validation/extraData.js'
 import { validateLot } from '../validation/lots.js'
-import { existsPart } from '../validation/numPart.js'
+import validateNumPart from '../validation/numPart.js'
 import { validateOperation } from '../validation/operation.js'
 import { getLocalStorage, setLocalStorage } from '../../config/storage.js'
 import idElements from '../../../utils/idElements.js'
@@ -20,7 +20,7 @@ export const generateNewTags = e => {
   // validar los datos
   if (
     !(
-      !existsPart() &&
+      validateNumPart() &&
       validateLot() &&
       validateTotalQty() &&
       validateStandar() &&

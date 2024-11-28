@@ -1,5 +1,7 @@
 import idElements from '../../../utils/idElements.js'
+import { expirationDate } from '../../functions/expirationDate.js'
 import { generateLot } from '../../functions/generateLot.js'
+import { setLot } from '../../functions/setLot.js'
 import { getInputs } from '../inputs/getInput.js'
 import { updateQr } from '../qr/qr.js'
 import { setValidations } from '../validation/validations.js'
@@ -8,7 +10,17 @@ import { generateNewTags } from './generate.js'
 import { vinculateSwitch } from './switch.js'
 
 export const initializeEvents = () => {
-  const { iNumPart, iLot, iOperation, iTotalQuantity, iStandar, iUnit } = getInputs()
+  const {
+    iNumPart,
+    iLot,
+    iOperation,
+    iTotalQuantity,
+    iStandar,
+    iUnit,
+    iDateLot,
+    iTurn,
+    iExpirationDays
+  } = getInputs()
 
   document
     .getElementById(idElements.id_f_generate)
@@ -32,6 +44,11 @@ export const initializeEvents = () => {
   iTotalQuantity.addEventListener('input', updateQr)
   iStandar.addEventListener('input', updateQr)
   iUnit.addEventListener('input', updateQr)
+
+  iDateLot.addEventListener('input', setLot)
+  iTurn.addEventListener('input', setLot)
+
+  iExpirationDays.addEventListener('input', expirationDate)
 
   setValidations()
 }

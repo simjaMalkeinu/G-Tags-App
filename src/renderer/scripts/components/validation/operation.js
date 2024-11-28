@@ -24,4 +24,6 @@ export const validateOperation = () => {
 
     return validated
   }
+
+  return true
 }

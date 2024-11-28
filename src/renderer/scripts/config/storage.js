@@ -6,7 +6,7 @@ export function getLocalStorage () {
   // Obtener los datos del localStorage
 
   return {
-    invoice: localStorage.getItem('invoice'),
+    invoice: parseInt(localStorage.getItem('invoice')),
     day: localStorage.getItem('day'),
     julDay: localStorage.getItem('julDate'),
     area: localStorage.getItem('area'),

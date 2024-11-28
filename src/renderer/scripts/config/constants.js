@@ -38,3 +38,10 @@ export const defaultValues = {
   julDay: '0',
   day: '01/01/2024'
 }
+
+export const configTag = {
+  PAGE_WIDTH: 101,
+  PAGE_HEIGHT: 50.8,
+  MARGINS: { top: 2, right: 0, bottom: 0, left: 2 },
+  QR_SIZE: 35
+}

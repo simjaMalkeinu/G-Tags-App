@@ -2,25 +2,20 @@ import { getShiftLetter } from './getShift.js'
 import { getLocalStorage } from '../config/storage.js'
 import { getInputs } from '../components/inputs/getInput.js'
 import { updateQr } from '../components/qr/qr.js'
+import { formatingLot } from './configurateLot.js'
 
 export const generateLot = () => {
   const { day: today } = getLocalStorage()
   const { iLot, iDateLot, iTurn } = getInputs()
 
-  // obtener la fecha actual
+  const dateLot = formatingLot(today)
   const date = new Date(today)
-  // obtener el mes actual
-  const month = (date.getMonth() + 1).toString().padStart(2, '0')
-  // obtener el año actual
-  const year = date.getFullYear().toString().substr(-2)
-  // obtener día actual
-  const day = date.getDate().toString().padStart(2, '0')
 
   // Llamar a la función getShiftLetter para obtener la letra del turno
   const shiftLetter = getShiftLetter(date)
   // Concatenar el mes, día, el año y la letra del turno
   // El formato será MMDDAA seguido de la letra del turno (A, B, o C)
-  const formattedDate = month + day + year + shiftLetter
+  const formattedDate = dateLot + shiftLetter
 
   // Asignar la fecha formateada al valor del elemento con id "lote"
   iLot.value = formattedDate

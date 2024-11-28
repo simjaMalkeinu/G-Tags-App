@@ -16,5 +16,14 @@ export default {
   id_c_qr: 'qr-code',
   id_msg_numPart: 'msg-num-part',
   id_msg_lot: 'msg-lot',
-  id_msg_operation: 'msg-operation'
+  id_msg_totalQty: 'msg-total-qty',
+  id_msg_standar: 'msg-standar',
+  id_msg_operation: 'msg-operation',
+  id_msg_expDate: 'msg-expiration-date',
+  id_msg_recepDate: 'msg-reception-date',
+  id_msg_secuence: 'msg-secuence',
+  id_c_numPart: 'c-num-part',
+  id_c_lot: 'c-lot',
+  id_c_quantity: 'c-quantity',
+  id_c_operation: 'c-operation'
 }

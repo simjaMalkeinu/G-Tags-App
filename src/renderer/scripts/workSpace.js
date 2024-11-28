@@ -5,6 +5,7 @@ import { initializePlace } from './components/place/place.js'
 import { defaultValues } from './config/constants.js'
 import { configureStorage, getLocalStorage } from './config/storage.js'
 import { initializeEvents } from './components/events/events.js'
+import { setMaxDate } from './functions/maxDate.js'
 
 document.addEventListener('DOMContentLoaded', async () => {
   await configureStorage(defaultValues)
@@ -15,6 +16,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   initializeSidebar()
   initializeNavigation()
   initializePlace(storageData.plant, storageData.area)
+
+  setMaxDate()
 
   initializeEvents()
 })

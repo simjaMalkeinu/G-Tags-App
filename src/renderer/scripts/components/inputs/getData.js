@@ -19,7 +19,11 @@ export const getDataInputs = () => {
   const gExpirationDate = document
     .getElementById(idValues.id_g_expirationdate)
     .value.trim()
+  const gExpirationDays = document
+    .getElementById(idValues.id_g_expirationday)
+    .value.trim()
   const gUnit = document.getElementById(idValues.id_g_unit).value.trim()
+  const gSecuence = document.getElementById(idValues.id_g_secuence).value.trim()
 
   return {
     gNumPart,
@@ -31,6 +35,8 @@ export const getDataInputs = () => {
     gStandar,
     gReceivedDate,
     gExpirationDate,
-    gUnit
+    gExpirationDays,
+    gUnit,
+    gSecuence
   }
 }

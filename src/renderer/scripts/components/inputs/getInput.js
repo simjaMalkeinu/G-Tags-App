@@ -9,9 +9,11 @@ export const getInputs = () => {
   const iOperation = document.getElementById(idValues.id_g_operation)
   const iTotalQuantity = document.getElementById(idValues.id_g_totalqty)
   const iStandar = document.getElementById(idValues.id_g_standar)
-  const iReceivedDate = document.getElementById(idValues.id_g_recepriondate)
+  const iReceivedDate = document.getElementById(idValues.id_g_receptiondate)
   const iExpirationDate = document.getElementById(idValues.id_g_expirationdate)
+  const iExpirationDays = document.getElementById(idValues.id_g_expirationday)
   const iUnit = document.getElementById(idValues.id_g_unit)
+  const iSecuence = document.getElementById(idValues.id_g_secuence)
 
   return {
     iNumPart,
@@ -23,7 +25,9 @@ export const getInputs = () => {
     iStandar,
     iReceivedDate,
     iExpirationDate,
-    iUnit
+    iExpirationDays,
+    iUnit,
+    iSecuence
   }
 }
 

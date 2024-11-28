@@ -4,6 +4,7 @@ import idElements from '../../../utils/idElements.js'
 import { getInputs } from '../inputs/getInput.js'
 import { coloringInput } from './colorInput.js'
 import { showMessage } from './message.js'
+import { getSwitchs } from '../buttons.js/checkbox.js'
 
 export const existsPart = numPart => {
   return ListParts.includes(numPart)
@@ -16,7 +17,11 @@ export const isUEPS = numPart => {
   const eShift = document.getElementById(idElements.id_e_shift)
   const eReception = document.getElementById(idElements.id_e_reception)
 
+  const eRecDate = document.getElementById(idElements.id_e_recdate)
+  const eSecObs = document.getElementById(idElements.id_e_secuence)
+
   const { iLot } = getInputs()
+  const { swtRecDate, swtSecuence } = getSwitchs()
 
   if (numPart.length >= 8) {
     // console.log('the part is a UEPS clave')
@@ -37,6 +42,12 @@ export const isUEPS = numPart => {
     iLot.disabled = true
     eReception.hidden = true
   }
+
+  swtRecDate.checked = false
+  swtSecuence.checked = false
+
+  eRecDate.hidden = true
+  eSecObs.hidden = true
 }
 
 export default function validateNumPart () {

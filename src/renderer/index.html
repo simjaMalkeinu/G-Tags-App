@@ -119,7 +119,7 @@
               <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1"
                 id="g-num-part" type="text" placeholder="Enter a number part" />
-                <span id="msg-num-part" class="pr-2"></span>
+              <span id="msg-num-part" class="pr-2"></span>
             </div>
 
             <!-- generar lote -->
@@ -160,7 +160,7 @@
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="g-lot" type="text" placeholder="121224A" disabled />
                 </div>
-                <span id="msg-lot"></span>
+                <span id="msg-lot" class="block w-full"></span>
                 <button id="btn-generate-lot"
                   class="w-full max-w-[220px] px-6 py-2 text-sm font-medium text-gray-500 border-gray-400  rounded-md hover:bg-gray-800 hover:text-white hover:border-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transition h-min border-2"
                   type="button">
@@ -178,18 +178,19 @@
               <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="g-operation" type="text" placeholder="Enter a operacion (10,20,30,40,...)" />
-                <span id="msg-operation"></span>
+              <span id="msg-operation"></span>
             </div>
 
             <div class="flex flex-wrap gap-2 mb-4">
               <!-- Cantidad total de piezas  -->
-              <div>
+              <div class="max-w-80 w-full">
                 <label class="block text-gray-800 text-sm font-bold mb-2" for="g-total-quantity">
                   Cantidad total de piezas
                 </label>
                 <input
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="g-total-quantity" type="text" placeholder="Enter the total quantity" />
+                  id="g-total-quantity" type="number" placeholder="Enter the total quantity" />
+                <span id="msg-total-qty"></span>
               </div>
 
               <!-- Unidad -->
@@ -216,7 +217,8 @@
               </label>
               <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="g-standar" type="text" placeholder="Enter the standar" />
+                id="g-standar" type="number" placeholder="Enter the standar" />
+              <span id="msg-standar"></span>
             </div>
 
             <!-- Activar caducidad -->
@@ -240,43 +242,57 @@
               <label class="block text-gray-800 text-sm font-bold mb-2" for="g-expiration-date">
                 Caducidad
               </label>
-              <div class="flex">
-                <input
-                  class="shadow appearance-none border rounded w-auto min-w-16 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="g-expiration-date" type="number" placeholder="Caduca en:" />
-                <span class="shadow border rounded w-auto py-2 px-3 text-white leading-tight bg-gray-700">
-                  Dias</span>
+              <div class="flex gap-2 justify-start">
+                <div class="flex">
+                  <input
+                    class="shadow appearance-none border rounded w-auto min-w-16 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="g-expiration-days" type="number" placeholder="Caduca en:" />
+                  <span class="shadow border rounded w-auto py-2 px-3 text-white leading-tight bg-gray-700">
+                    Dias</span>
+                </div>
+                <div class="flex">
+                  <span class="shadow border rounded w-auto py-2 px-3 text-white leading-tight bg-gray-700">
+                    Caduca el:</span>
+                  <input
+                    class="shadow appearance-none border rounded w-auto min-w-16 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="g-expiration-date" type="text" placeholder="MM/DD/YYYY" disabled />
+                </div>
               </div>
+              <span id="msg-expiration-date"></span>
             </div>
 
+            <!-- Activar fecha de recepcion -->
             <div id="e-reception" hidden>
               <!-- Activar fecha de recepcion  -->
-            <div class="mb-4">
-              <div class="flex items-center gap-3">
-                <label for="switch-activate-print-date" class="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" id="switch-activate-print-date" class="sr-only peer" />
-                  <div
-                    class="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-white rounded-full peer-checked:bg-gray-800">
-                  </div>
-                  <div
-                    class="absolute left-1 top-1 w-4 h-4 bg-white border border-gray-300 rounded-full transition-transform peer-checked:translate-x-5 peer-checked:border-gray-800">
-                  </div>
+              <div class="mb-4">
+                <div class="flex items-center gap-3">
+                  <label for="switch-activate-print-date" class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="switch-activate-print-date" class="sr-only peer" />
+                    <div
+                      class="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-white rounded-full peer-checked:bg-gray-800">
+                    </div>
+                    <div
+                      class="absolute left-1 top-1 w-4 h-4 bg-white border border-gray-300 rounded-full transition-transform peer-checked:translate-x-5 peer-checked:border-gray-800">
+                    </div>
+                  </label>
+                  <span class="text-sm font-medium text-gray-700">Incluir fecha de recepcion</span>
+                </div>
+              </div>
+
+              <!-- fecha de recepcion -->
+              <div id="input-date-reception" class="mb-4 transition" hidden>
+                <label class="block text-gray-800 text-sm font-bold mb-2" for="g-reception-date">
+                  Fecha de recepcion (<span class="text-gray-500 font-normal">Seleccione la fecha con el
+                    calendario</span>)
                 </label>
-                <span class="text-sm font-medium text-gray-700">Incluir fecha de recepcion</span>
+                <input
+                  class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1"
+                  id="g-reception-date" type="date" onkeydown="return false;" />
+                <span id="msg-reception-date" class="w-full block"></span>
               </div>
             </div>
 
-            <!-- fecha de recepcion -->
-            <div id="input-date-reception" class="mb-4 transition" hidden>
-              <label class="block text-gray-800 text-sm font-bold mb-2" for="g-reception-date">
-                Fecha de recepcion
-              </label>
-              <input
-                class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="g-reception-date" type="date" placeholder="Enter the total quantity" />
-            </div>
-            </div>
-
+            <!-- Activar secuencia -->
             <div id="e-secuence" hidden>
               <!-- Activar secuencia de etiquetado -->
               <div class="mb-4">
@@ -302,6 +318,7 @@
                 <input
                   class="shadow appearance-none border rounded w-full min-w-16 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="g-secuence" type="text" placeholder="Caduca en:" />
+                <span id="msg-secuence" class="pl-2">Las observaciones se repetiran en todas las etiquetas</span>
               </div>
             </div>
 
@@ -323,16 +340,17 @@
             </div>
           </form>
 
+          <!-- Tarjeta previsualizacion -->
           <div
             class="max-w-xl max-h-56 min-w-[430px] mx-auto bg-white border border-gray-200 shadow-md rounded p-4 flex flex-wrap items-center">
             <!-- Información a la izquierda -->
             <div class="flex-1">
               <h2 class="text-lg font-semibold text-gray-700">Etiqueta de Material</h2>
               <ul class="mt-2 space-y-1 text-sm text-gray-600">
-                <li><strong>Material:</strong> Acero Inoxidable</li>
-                <li><strong>Código:</strong> 12345-AB</li>
-                <li><strong>Cantidad:</strong> 25 piezas</li>
-                <li><strong>Ubicación:</strong> Almacén A3</li>
+                <li><strong>Material:</strong> <span id="c-num-part"></span></li>
+                <li><strong>Lote:</strong> <span id="c-lot"></span></li>
+                <li><strong>Cantidad:</strong> <span id="c-quantity"></span></li>
+                <li><strong>Operacion:</strong> <span id="c-operation"></span></li>
               </ul>
             </div>
 
@@ -383,12 +401,23 @@
   </main>
 
   <!-- Scripts -->
-  <script src="./scripts/materialize/materialize.min.js"></script>
+   <!-- Libreria de materialize -->
+  <script src="./scripts/libraries/materialize/materialize.min.js"></script>
+
+  <!-- Librerias para generar el PDF -->
+   <script src="./scripts/libraries/jsPDF/jspdf.umd.min.js"></script>
+   <script src="./scripts/libraries/jsPDF/jspdf.plugin.autotable.js"></script>
+
+  <!-- Libraria de QR -->
+  <script src="./scripts/libraries/qrcode.min.js"></script>
+
+  <!-- Renderizador de eventos de electron -->
   <script src="./scripts/renderer.js" defer></script>
+
+  <!-- Coneccion a la base de datos -->
   <script src="./scripts/db.js" defer></script>
 
-  <!-- Libraries -->
-  <script src="./scripts/libraries/qrcode.min.js"></script>
+  <!-- Espacio de trabajo -->
   <script type="module" src="./scripts/workSpace.js" defer></script>
 </body>
 

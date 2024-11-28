@@ -2,6 +2,7 @@
 
 import idElements from '../../../utils/idElements.js'
 import { getDataInputs } from '../inputs/getData.js'
+import { updateCard } from './card.js'
 
 export const updateQr = () => {
   //   console.log('Updating QR code...')
@@ -25,4 +26,6 @@ export const updateQr = () => {
   })
   // console.log(qrCode)
   qrCode.makeCode(qrData)
+
+  updateCard()
 }

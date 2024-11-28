@@ -22,9 +22,9 @@ export const generateNewTags = e => {
     !(
       validateNumPart() &&
       validateLot() &&
+      validateOperation() &&
       validateTotalQty() &&
       validateStandar() &&
-      validateOperation() &&
       validateExpDate() &&
       validateRecDate() &&
       validateSecuence()

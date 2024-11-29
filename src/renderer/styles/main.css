@@ -38,3 +38,11 @@
     transform: translateY(0);
   }
 }
+
+/* Para bordes redondeados en el scroll */
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  border-radius: 10px;
+}

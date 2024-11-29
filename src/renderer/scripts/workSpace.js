@@ -6,6 +6,7 @@ import { defaultValues } from './config/constants.js'
 import { configureStorage, getLocalStorage } from './config/storage.js'
 import { initializeEvents } from './components/events/events.js'
 import { setMaxDate } from './functions/maxDate.js'
+import { setRoute } from './components/navigation/setRoute.js'
 
 document.addEventListener('DOMContentLoaded', async () => {
   await configureStorage(defaultValues)
@@ -20,4 +21,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   setMaxDate()
 
   initializeEvents()
+
+  setRoute()
 })

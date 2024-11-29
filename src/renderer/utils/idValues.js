@@ -10,5 +10,17 @@ export default {
   id_g_expirationday: 'g-expiration-days',
   id_g_expirationdate: 'g-expiration-date',
   id_g_unit: 'g-unit',
-  id_g_secuence: 'g-secuence'
+  id_g_secuence: 'g-secuence',
+  // datos para editar la etiqueta
+  id_r_numpart: 'r-num-part',
+  id_r_folio: 'r-folio',
+  id_r_lot: 'r-lot',
+  id_r_operation: 'r-operation',
+  id_r_register: 'r-register',
+  id_r_quantity: 'r-quantity',
+  id_r_receptiondate: 'r-reception-date',
+  id_r_expirationday: 'r-expiration-days',
+  id_r_expirationdate: 'r-expiration-date',
+  id_r_unit: 'r-unit',
+  id_r_secuence: 'r-secuence'
 }

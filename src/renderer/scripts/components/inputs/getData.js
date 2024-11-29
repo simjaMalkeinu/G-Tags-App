@@ -1,29 +1,58 @@
-import idValues from '../../../utils/idValues.js'
+import { getInputs } from './getInput.js'
 
 export const getDataInputs = () => {
+  const {
+    iNumPart,
+    iDateLot,
+    iTurn,
+    iLot,
+    iOperation,
+    iTotalQuantity,
+    iStandar,
+    iReceivedDate,
+    iExpirationDate,
+    iExpirationDays,
+    iUnit,
+    iSecuence,
+    irNumPart,
+    irLot,
+    irOperation,
+    irQuantity,
+    irFolio,
+    irRegister,
+    irReceivedDate,
+    irExpirationDate,
+    irExpirationDays,
+    irSecuence,
+    irUnit
+  } = getInputs()
+
   // inputs para generar etiquetas
-  const gNumPart = document.getElementById(idValues.id_g_numpart).value.trim()
-  const gDateLot = document.getElementById(idValues.id_g_datelot).value.trim()
-  const gTurn = document.getElementById(idValues.id_g_turn).value.trim()
-  const gLot = document.getElementById(idValues.id_g_lot).value.trim()
-  const gOperation = document
-    .getElementById(idValues.id_g_operation)
-    .value.trim()
-  const gTotalQuantity = document
-    .getElementById(idValues.id_g_totalqty)
-    .value.trim()
-  const gStandar = document.getElementById(idValues.id_g_standar).value.trim()
-  const gReceivedDate = document
-    .getElementById(idValues.id_g_receptiondate)
-    .value.trim()
-  const gExpirationDate = document
-    .getElementById(idValues.id_g_expirationdate)
-    .value.trim()
-  const gExpirationDays = document
-    .getElementById(idValues.id_g_expirationday)
-    .value.trim()
-  const gUnit = document.getElementById(idValues.id_g_unit).value.trim()
-  const gSecuence = document.getElementById(idValues.id_g_secuence).value.trim()
+  const gNumPart = iNumPart.value.trim()
+  const gDateLot = iDateLot.value.trim()
+  const gTurn = iTurn.value.trim()
+  const gLot = iLot.value.trim()
+  const gOperation = iOperation.value.trim()
+  const gTotalQuantity = iTotalQuantity.value.trim()
+  const gStandar = iStandar.value.trim()
+  const gReceivedDate = iReceivedDate.value.trim()
+  const gExpirationDate = iExpirationDate.value.trim()
+  const gExpirationDays = iExpirationDays.value.trim()
+  const gUnit = iUnit.value.trim()
+  const gSecuence = iSecuence.value.trim()
+
+  // Inpurts para editar etiquetas
+  const rNumPart = irNumPart.value.trim()
+  const rFolio = irFolio.value.trim()
+  const rRegister = irRegister.value.trim()
+  const rLot = irLot.value.trim()
+  const rOperation = irOperation.value.trim()
+  const rQuantity = irQuantity.value.trim()
+  const rReceivedDate = irReceivedDate.value.trim()
+  const rExpirationDate = irExpirationDate.value.trim()
+  const rExpirationDays = irExpirationDays.value.trim()
+  const rSecuence = irSecuence.value.trim()
+  const rUnit = irUnit.value.trim()
 
   return {
     gNumPart,
@@ -37,6 +66,17 @@ export const getDataInputs = () => {
     gExpirationDate,
     gExpirationDays,
     gUnit,
-    gSecuence
+    gSecuence,
+    rNumPart,
+    rLot,
+    rOperation,
+    rQuantity,
+    rFolio,
+    rRegister,
+    rReceivedDate,
+    rExpirationDate,
+    rExpirationDays,
+    rSecuence,
+    rUnit
   }
 }

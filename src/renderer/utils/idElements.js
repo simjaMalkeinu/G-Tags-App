@@ -14,6 +14,7 @@ export default {
   id_e_shift: 'e-shift',
   id_e_reception: 'e-reception',
   id_c_qr: 'qr-code',
+  id_rc_qr: 'r-qr-code',
   id_msg_numPart: 'msg-num-part',
   id_msg_lot: 'msg-lot',
   id_msg_totalQty: 'msg-total-qty',
@@ -25,5 +26,12 @@ export default {
   id_c_numPart: 'c-num-part',
   id_c_lot: 'c-lot',
   id_c_quantity: 'c-quantity',
-  id_c_operation: 'c-operation'
+  id_c_operation: 'c-operation',
+  //
+  id_btn_r_expdate: 'r-switch-activate-expiration-date',
+  id_btn_r_recdate: 'r-switch-activate-print-date',
+  id_btn_r_secuence: 'r-switch-activate-secuence',
+  id_e_r_recdate: 'r-input-date-reception',
+  id_e_r_expdate: 'r-input-expiration-date',
+  id_e_r_secuence: 'r-input-secuence'
 }

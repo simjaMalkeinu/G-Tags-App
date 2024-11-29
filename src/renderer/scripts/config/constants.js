@@ -36,7 +36,8 @@ export const defaultValues = {
   planta: 'V1', // Planta predeterminada
   isSmall: false,
   julDay: '0',
-  day: '01/01/2024'
+  day: '01/01/2024',
+  route: 'generateTag'
 }
 
 export const configTag = {

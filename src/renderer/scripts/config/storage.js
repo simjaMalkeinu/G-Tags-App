@@ -11,6 +11,7 @@ export function getLocalStorage () {
     julDay: localStorage.getItem('julDate'),
     area: localStorage.getItem('area'),
     plant: localStorage.getItem('planta'),
+    route: localStorage.getItem('route'),
     isSmall: localStorage.getItem('isSmall')
   }
 }

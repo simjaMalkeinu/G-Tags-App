@@ -34,6 +34,10 @@ export const initializeEvents = () => {
   vinculateSwitch(idElements.id_btn_recdate, idElements.id_e_recdate)
   vinculateSwitch(idElements.id_btn_secuence, idElements.id_e_secuence)
 
+  vinculateSwitch(idElements.id_btn_r_expdate, idElements.id_e_r_expdate)
+  vinculateSwitch(idElements.id_btn_r_recdate, idElements.id_e_r_recdate)
+  vinculateSwitch(idElements.id_btn_r_secuence, idElements.id_e_r_secuence)
+
   document
     .getElementById(idElements.id_btn_autoLot)
     .addEventListener('click', generateLot)

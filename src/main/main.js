@@ -11,9 +11,9 @@ let mainWindow
 function createMainWindow () {
   mainWindow = new BrowserWindow({
     width: 800, // Tamaño inicial
-    height: 600, // Tamaño inicial
-    minWidth: 650, // Ancho mínimo
-    minHeight: 450, // Alto mínimo
+    height: 900, // Tamaño inicial
+    minWidth: 700, // Ancho mínimo
+    minHeight: 900, // Alto mínimo
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false

@@ -15,6 +15,18 @@ export const getInputs = () => {
   const iUnit = document.getElementById(idValues.id_g_unit)
   const iSecuence = document.getElementById(idValues.id_g_secuence)
 
+  const irNumPart = document.getElementById(idValues.id_r_numpart)
+  const irLot = document.getElementById(idValues.id_r_lot)
+  const irOperation = document.getElementById(idValues.id_r_operation)
+  const irQuantity = document.getElementById(idValues.id_r_quantity)
+  const irFolio = document.getElementById(idValues.id_r_folio)
+  const irRegister = document.getElementById(idValues.id_r_register)
+  const irReceivedDate = document.getElementById(idValues.id_r_receptiondate)
+  const irExpirationDate = document.getElementById(idValues.id_r_expirationdate)
+  const irExpirationDays = document.getElementById(idValues.id_r_expirationday)
+  const irUnit = document.getElementById(idValues.id_r_unit)
+  const irSecuence = document.getElementById(idValues.id_r_secuence)
+
   return {
     iNumPart,
     iDateLot,
@@ -27,7 +39,18 @@ export const getInputs = () => {
     iExpirationDate,
     iExpirationDays,
     iUnit,
-    iSecuence
+    iSecuence,
+    irNumPart,
+    irLot,
+    irOperation,
+    irQuantity,
+    irFolio,
+    irRegister,
+    irReceivedDate,
+    irExpirationDate,
+    irExpirationDays,
+    irSecuence,
+    irUnit
   }
 }
 

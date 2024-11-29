@@ -48,8 +48,6 @@ export const generateNewTags = e => {
     gSecuence
   } = getDataInputs()
   const { area, invoice, julDay } = getLocalStorage()
-  console.log(invoice)
-
   const { swtExpDate, swtRecDate, swtSecuence } = getSwitchs()
 
   const validateRC = gNumPart.length < 10
@@ -85,9 +83,7 @@ export const generateNewTags = e => {
 
     qrText = `${gNumPart}\t ${gLot}\t ${
       res >= gStandar ? gStandar : res
-    }\t ${gUnit}\t ${gOperation}\t`
-
-    console.log(qrText)
+    }\t ${gUnit}\t ${validateRC ? gOperation : ''}\t`
 
     let folioTag = ''
 
@@ -98,11 +94,7 @@ export const generateNewTags = e => {
       .toString()
       .padStart(4, '0')}\t ${qrText}`
 
-    console.log(QRInfo)
-
     folioTag = `${area}${julDay}-${(i + 1).toString().padStart(4, '0')}`
-
-    console.log(folioTag)
 
     const qrCode = new QRCode(qrCanvas, {
       width: 158,

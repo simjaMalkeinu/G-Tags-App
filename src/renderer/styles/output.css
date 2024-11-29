@@ -780,10 +780,6 @@ video {
   max-height: 20rem;
 }
 
-.max-h-\[900px\] {
-  max-height: 900px;
-}
-
 .w-1 {
   width: 0.25rem;
 }
@@ -1128,18 +1124,6 @@ video {
   padding-top: 1.5rem;
 }
 
-.pl-4 {
-  padding-left: 1rem;
-}
-
-.pr-1 {
-  padding-right: 0.25rem;
-}
-
-.pt-2 {
-  padding-top: 0.5rem;
-}
-
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
@@ -1340,18 +1324,6 @@ video {
   display: block;
   width: 8px;
   height: 8px;
-}
-
-.scrollbar-track-gray-200 {
-  --scrollbar-track: #e5e7eb !important;
-}
-
-.scrollbar-track-gray-500 {
-  --scrollbar-track: #6b7280 !important;
-}
-
-.scrollbar-thumb-gray-500 {
-  --scrollbar-thumb: #6b7280 !important;
 }
 
 .scrollbar-thumb-gray-800 {

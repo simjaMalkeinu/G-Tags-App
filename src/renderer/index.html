@@ -371,6 +371,9 @@
           <!-- Formulario -->
           <form id="f-edit" class="bg-white shadow-md rounded px-4 pt-6 pb-8 w-full h-min">
 
+            <h1 class="mb-4"><span class="bg-cyan-950 px-2 py-1 rounded text-white">NOTA:</span> Para visualizar la
+              etiqueta precionar la tecla 'Enter' o precionar el boton de ver previsualizacion</h1>
+
             <!-- Folio de la etiqueta -->
             <div class="mb-4">
               <label class="block text-gray-800 text-sm font-bold mb-2" for="r-folio">
@@ -552,12 +555,13 @@
             </div>
 
             <!-- Botones de formulario -->
-            <div class="flex items-center justify-start gap-4 pt-4">
-              <!-- Boton para generar -->
+            <div class="flex items-center justify-between gap-4 pt-4">
+
+              <!-- Boton ver tag -->
               <button
                 class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition"
                 type="submit">
-                Generar etiqueta
+                Ver etiqueta
               </button>
 
               <!-- boton para limpiar -->
@@ -572,10 +576,34 @@
 
           </form>
 
-          <!-- Columna derecha: Previsualización PDF -->
-          <div class="border border-gray-300 rounded-lg max-h-80 max-w-[400]">
-            <iframe id="pdf-preview" class="w-full h-full rounded"></iframe>
+          <div class="h-full flex flex-col">
+            <div class="flex gap-4 mb-4">
+              <!-- Botón para guardar el PDF -->
+              <button
+                id="save-pdf-btn"
+                class="flex items-center px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 transition"
+              >
+                <i class="fas fa-save mr-2"></i>
+                Guardar etiqueta
+              </button>
+            
+              <!-- Botón para imprimir el PDF -->
+              <button
+                id="print-pdf-btn"
+                class="flex items-center px-4 py-2 bg-green-800 text-white rounded shadow hover:bg-green-600 transition"
+              >
+                <i class="fas fa-print mr-2"></i>
+                Imprimir etiqueta
+              </button>
+            </div>
+            
+
+            <!-- Columna derecha: Previsualización PDF -->
+            <div class="border border-gray-300 rounded-lg max-h-96 max-w-[400] flex-1">
+              <iframe id="pdf-preview" class="w-full h-full rounded"></iframe>
+            </div>
           </div>
+
         </div>
 
       </div>
@@ -590,7 +618,7 @@
             Obtener el historial de impreciones
           </button>
 
-          <button id="btn-print-historial"
+          <button id="btn-print-historial" hidden
             class="bg-gray-200 hover:bg-gray-500 border-2 border-gray-500 text-gray-800 hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition"
             type="reset">
             Imprimir historial
@@ -607,18 +635,19 @@
         </div>
 
         <!-- Tabla de datos -->
-        <div class="w-full max-w-4xl mx-auto">
+        <div class="w-full max-w-7xl mx-auto">
           <table id="data-table" class="min-w-full bg-white rounded-lg shadow-lg hidden transition-all">
             <thead>
-              <tr class="bg-gray-800 text-white text-left">
+              <tr class="bg-gray-800 text-white text-center">
                 <th class="px-4 py-2">ID</th>
+                <th class="px-4 py-2">Tipo</th>
                 <th class="px-4 py-2">Fecha</th>
                 <th class="px-4 py-2">Hora</th>
                 <th class="px-4 py-2">Planta</th>
                 <th class="px-4 py-2">Área</th>
-                <th class="px-4 py-2">Número de Etiquetas</th>
-                <th class="px-4 py-2">Inicio Seriados</th>
-                <th class="px-4 py-2">Final Seriados</th>
+                <th class="px-4 py-2">Numero de parte</th>
+                <th class="px-4 py-2">Cantidad de Etiquetas</th>
+                <th class="px-4 py-2" colspan="3">Folios</th>
               </tr>
             </thead>
             <tbody id="table-body" class="text-center">

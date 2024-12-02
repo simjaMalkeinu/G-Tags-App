@@ -10,8 +10,7 @@ export const getHistory = async () => {
   tableBody.innerHTML = ''
 
   // Solicita los registros al backend
-  // Solicita los registros al backend
-  window.databaseAPI
+  await window.databaseAPI
     .getRecords()
     .then(data => {
       console.log(data)
@@ -28,19 +27,36 @@ export const getHistory = async () => {
         tableBody.appendChild(emptyRow)
       } else {
         // Llena la tabla con los datos
-        data.forEach(record => {
+        data.registros.forEach(record => {
           const row = document.createElement('tr')
           row.innerHTML = `
               <td class="px-4 py-2 border border-gray-300">${record.id}</td>
+              <td class="px-4 py-2 border border-gray-300"><span class="${
+                record.tipo === 'Generado' ? 'bg-green-800' : 'bg-cyan-800'
+              } text-white px-2 py-1 rounded" >${record.tipo}</span></td>
               <td class="px-4 py-2 border border-gray-300">${record.fecha}</td>
               <td class="px-4 py-2 border border-gray-300">${record.hora}</td>
               <td class="px-4 py-2 border border-gray-300">${record.planta}</td>
               <td class="px-4 py-2 border border-gray-300">${record.area}</td>
-              <td class="px-4 py-2 border border-gray-300">${record.numero_etiquetas}</td>
-              <td class="px-4 py-2 border border-gray-300">${record.inicio_seriado}</td>
-              <td class="px-4 py-2 border border-gray-300">${record.final_seriado}</td>
+              <td class="px-4 py-2 border border-gray-300">${
+                record.part_num
+              }</td>
+              <td class="px-4 py-2 border border-gray-300">${
+                record.numero_etiquetas
+              }</td>
+              <td class="px-4 py-2 border border-gray-300">${record.inicio_seriado.padStart(
+                4,
+                '0'
+              )}</td>
+              <td class="px-4 py-2 border border-gray-300"> al </td>
+              <td class="px-4 py-2 border border-gray-300">${record.final_seriado.padStart(
+                4,
+                '0'
+              )}</td>
             `
           tableBody.appendChild(row)
+
+          document.getElementById('btn-print-historial').hidden = false
         })
       }
 
@@ -58,4 +74,16 @@ export const getHistory = async () => {
         `
     })
     .finally(loader.classList.add('hidden'))
+}
+
+export const registerGeneration = async newRow => {
+  // console.log(newRow)
+  await window.databaseAPI
+    .addRecord(newRow)
+    .then(data => {
+      console.log(data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
 }

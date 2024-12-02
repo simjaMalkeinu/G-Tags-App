@@ -44,7 +44,7 @@ export const editTags = e => {
 
   let num = rFolio
   num = num.split('-')
-  console.log(num[1]) // 0005B
+  // console.log(num[1]) // 0005B
 
   QRInfo = `${num[0]}-${nextLetter(num[1])}\t ${QRInfo}`
   foliotext = `${num[0]}-${nextLetter(num[1])}`
@@ -211,5 +211,5 @@ export const editTags = e => {
   const pdfURL = URL.createObjectURL(pdfBlob)
 
   const pdfPreview = document.getElementById('pdf-preview')
-  pdfPreview.src = pdfURL
+  pdfPreview.src = `${pdfURL}#toolbar=0&navpanes=0`
 }

@@ -4,10 +4,12 @@ import { expirationDate } from '../../functions/expirationDate.js'
 import { generateLot } from '../../functions/generateLot.js'
 import { setLot } from '../../functions/setLot.js'
 import { getInputs } from '../inputs/getInput.js'
+import { printPDF, savePDF } from '../pdfs/eventsPDF.js'
 import { updateQr } from '../qr/qr.js'
 import { setValidations } from '../validation/validations.js'
 import { editTags } from './edit.js'
 import { generateNewTags } from './generate.js'
+import { printHistory } from './printHistory.js'
 import { vinculateSwitch } from './switch.js'
 
 export const initializeEvents = () => {
@@ -46,6 +48,13 @@ export const initializeEvents = () => {
   document
     .getElementById('btn-get-historial')
     .addEventListener('click', getHistory)
+
+  document
+    .getElementById('btn-print-historial')
+    .addEventListener('click', printHistory)
+
+  document.getElementById('save-pdf-btn').addEventListener('click', savePDF)
+  document.getElementById('print-pdf-btn').addEventListener('click', printPDF)
 
   iNumPart.addEventListener('input', updateQr)
   iLot.addEventListener('input', updateQr)

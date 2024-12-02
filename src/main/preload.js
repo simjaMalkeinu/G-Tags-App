@@ -21,7 +21,11 @@ contextBridge.exposeInMainWorld('versions', {
 
 contextBridge.exposeInMainWorld('electronAPI', {
   setTitle: title => ipcRenderer.send('set-title', title),
-  getCurrentDate: async () => await ipcRenderer.invoke('get-current-date')
+  getCurrentDate: async () => await ipcRenderer.invoke('get-current-date'),
+  savePDF: callback => ipcRenderer.on('download-status', callback),
+  printPDF: callback => ipcRenderer.on('print-status', callback),
+  on: (channel, callback) =>
+    ipcRenderer.on(channel, (event, data) => callback(event, data))
 })
 
 contextBridge.exposeInMainWorld('databaseAPI', {

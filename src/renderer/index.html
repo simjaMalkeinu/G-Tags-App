@@ -582,8 +582,51 @@
 
       <!-- Ver historial -->
       <div id="historial" class="page-route">
-        <h1>Here is the Hostory page.</h1>
-        <button id="btn-get-historial">Obtener historial</button>
+        <!-- Botón de consulta -->
+        <div class="flex gap-2 mb-6">
+          <button id="btn-get-historial"
+            class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition"
+            type="submit">
+            Obtener el historial de impreciones
+          </button>
+
+          <button id="btn-print-historial"
+            class="bg-gray-200 hover:bg-gray-500 border-2 border-gray-500 text-gray-800 hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition"
+            type="reset">
+            Imprimir historial
+          </button>
+        </div>
+
+        <!-- Loader (oculto por defecto) -->
+        <div id="loader" class="justify-center items-center hidden">
+          <svg class="animate-spin h-8 w-8 text-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+          </svg>
+        </div>
+
+        <!-- Tabla de datos -->
+        <div class="w-full max-w-4xl mx-auto">
+          <table id="data-table" class="min-w-full bg-white rounded-lg shadow-lg hidden transition-all">
+            <thead>
+              <tr class="bg-gray-800 text-white text-left">
+                <th class="px-4 py-2">ID</th>
+                <th class="px-4 py-2">Fecha</th>
+                <th class="px-4 py-2">Hora</th>
+                <th class="px-4 py-2">Planta</th>
+                <th class="px-4 py-2">Área</th>
+                <th class="px-4 py-2">Número de Etiquetas</th>
+                <th class="px-4 py-2">Inicio Seriados</th>
+                <th class="px-4 py-2">Final Seriados</th>
+              </tr>
+            </thead>
+            <tbody id="table-body" class="text-center">
+              <!-- Aquí se agregarán las filas dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+
       </div>
     </div>
   </main>
@@ -601,9 +644,6 @@
 
   <!-- Renderizador de eventos de electron -->
   <script src="./scripts/renderer.js" defer></script>
-
-  <!-- Coneccion a la base de datos -->
-  <script src="./scripts/db.js" defer></script>
 
   <!-- Espacio de trabajo -->
   <script type="module" src="./scripts/workSpace.js" defer></script>

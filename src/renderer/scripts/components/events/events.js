@@ -1,4 +1,5 @@
 import idElements from '../../../utils/idElements.js'
+import { getHistory } from '../../db.js'
 import { expirationDate } from '../../functions/expirationDate.js'
 import { generateLot } from '../../functions/generateLot.js'
 import { setLot } from '../../functions/setLot.js'
@@ -41,6 +42,10 @@ export const initializeEvents = () => {
   document
     .getElementById(idElements.id_btn_autoLot)
     .addEventListener('click', generateLot)
+
+  document
+    .getElementById('btn-get-historial')
+    .addEventListener('click', getHistory)
 
   iNumPart.addEventListener('input', updateQr)
   iLot.addEventListener('input', updateQr)

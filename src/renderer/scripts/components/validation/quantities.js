@@ -23,7 +23,7 @@ export const validateTotalQty = () => {
 export const validateStandar = () => {
   const { gStandar, gTotalQuantity } = getDataInputs()
 
-  const validate = gStandar !== '' && gStandar <= gTotalQuantity
+  const validate = gStandar !== '' && gStandar <= parseInt(gTotalQuantity, 10)
 
   coloringInput(idValues.id_g_standar, validate)
 

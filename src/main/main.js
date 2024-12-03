@@ -5,6 +5,10 @@ const routes = require('./config/routes') // Archivo que define las rutas
 const setupAutoUpdater = require('./config/autoUpdater') // Importa la configuración de autoUpdater
 
 const db = require('../database/db')
+const {
+  setupDownloadHandler,
+  setupPrintHandler
+} = require('./config/eventHandlers')
 
 let mainWindow
 
@@ -21,6 +25,12 @@ function createMainWindow () {
   })
 
   mainWindow.loadFile(path.join(__dirname, routes.index))
+
+  // Manejar eventos de descarga
+  setupDownloadHandler(mainWindow)
+
+  // Interceptar impresión
+  setupPrintHandler(mainWindow)
 }
 
 // Escucha el evento para iniciar la búsqueda de actualizaciones
@@ -32,6 +42,11 @@ ipcMain.on('check-for-updates', () => {
 // Manejar consultas desde el renderizador
 ipcMain.handle('db:getRecords', () => {
   return db.obtenerRegistros()
+})
+
+ipcMain.handle('db:addRecord', (evento, registro) => {
+  // console.log(registro)
+  return db.insertarRegistro(registro)
 })
 
 // Manejador para enviar la fecha actual

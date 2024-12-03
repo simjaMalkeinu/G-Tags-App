@@ -13,6 +13,7 @@ import { getLocalStorage, setLocalStorage } from '../../config/storage.js'
 import idElements from '../../../utils/idElements.js'
 import { getSwitchs } from '../buttons.js/checkbox.js'
 import { validateStandar, validateTotalQty } from '../validation/quantities.js'
+import { registerGeneration } from '../../db.js'
 
 export const generateNewTags = e => {
   e.preventDefault()
@@ -47,7 +48,7 @@ export const generateNewTags = e => {
     gExpirationDate,
     gSecuence
   } = getDataInputs()
-  const { area, invoice, julDay } = getLocalStorage()
+  const { area, invoice, julDay, plant } = getLocalStorage()
   const { swtExpDate, swtRecDate, swtSecuence } = getSwitchs()
 
   const validateRC = gNumPart.length < 10
@@ -261,6 +262,16 @@ export const generateNewTags = e => {
 
   // Guarda o descarga el PDF al finalizar el bucle
   doc.save(`TAGS-${gNumPart}${gOperation}.pdf`)
+
+  registerGeneration({
+    tipo: 'Generado',
+    planta: plant,
+    area,
+    num_part: gNumPart,
+    numero_etiquetas: cantEtiquetas,
+    inicio_seriado: invoice,
+    final_seriado: invoice + parseInt(cantEtiquetas, 10) - 1
+  })
 
   const text = validateRC ? ' el RC ' : 'la CLAVE UEPS '
 

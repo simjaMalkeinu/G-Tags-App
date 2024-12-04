@@ -20,6 +20,8 @@ export const isUEPS = numPart => {
   const eRecDate = document.getElementById(idElements.id_e_recdate)
   const eSecObs = document.getElementById(idElements.id_e_secuence)
 
+  const btnPersonalize = document.getElementById(idElements.id_btn_personalize)
+
   const { iLot } = getInputs()
   const { swtRecDate, swtSecuence } = getSwitchs()
 
@@ -32,6 +34,7 @@ export const isUEPS = numPart => {
     eShift.hidden = true
     iLot.disabled = false
     eReception.hidden = false
+    btnPersonalize.hidden = true
   } else {
     // console.log('the part is a rc clave')
     eOperation.hidden = false
@@ -41,6 +44,7 @@ export const isUEPS = numPart => {
     eShift.hidden = false
     iLot.disabled = true
     eReception.hidden = true
+    btnPersonalize.hidden = false
   }
 
   swtRecDate.checked = false

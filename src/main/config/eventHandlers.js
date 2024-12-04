@@ -12,14 +12,14 @@ module.exports = {
       // Registrar cuando termine la descarga
       item.once('done', (e, state) => {
         if (state === 'completed') {
-          console.log('Descarga completada:', fileName)
+          // console.log('Descarga completada:', fileName)
           mainWindow.webContents.send('download-status', {
             status: 'completed',
             fileName,
             filePath
           })
         } else {
-          console.log('Descarga fallida:', fileName)
+          // console.log('Descarga fallida:', fileName)
           mainWindow.webContents.send('download-status', {
             status: 'failed',
             fileName
@@ -32,7 +32,7 @@ module.exports = {
   setupPrintHandler: mainWindow => {
     // Interceptar impresión
     mainWindow.webContents.on('did-start-print', () => {
-      console.log('El usuario abrió el diálogo de impresión.')
+      // console.log('El usuario abrió el diálogo de impresión.')
       mainWindow.webContents.send('print-status', { status: 'started' })
     })
   }

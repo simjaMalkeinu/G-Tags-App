@@ -1,7 +1,7 @@
 import idElements from '../../../utils/idElements.js'
 import { getHistory } from '../../db.js'
-import { expirationDate } from '../../functions/expirationDate.js'
-import { generateLot } from '../../functions/generateLot.js'
+import { expirationDate, setNewExpirationDate } from '../../functions/expirationDate.js'
+import { generateLot, personalizeLot } from '../../functions/generateLot.js'
 import { setLot } from '../../functions/setLot.js'
 import { getInputs } from '../inputs/getInput.js'
 import { printPDF, savePDF } from '../pdfs/eventsPDF.js'
@@ -10,6 +10,7 @@ import { setValidations } from '../validation/validations.js'
 import { editTags } from './edit.js'
 import { generateNewTags } from './generate.js'
 import { printHistory } from './printHistory.js'
+import { resetGenerate, resetRead } from './resets.js'
 import { vinculateSwitch } from './switch.js'
 
 export const initializeEvents = () => {
@@ -22,7 +23,8 @@ export const initializeEvents = () => {
     iUnit,
     iDateLot,
     iTurn,
-    iExpirationDays
+    iExpirationDays,
+    irExpirationDays
   } = getInputs()
 
   document
@@ -30,8 +32,16 @@ export const initializeEvents = () => {
     .addEventListener('submit', generateNewTags)
 
   document
+    .getElementById(idElements.id_f_generate)
+    .addEventListener('reset', resetGenerate)
+
+  document
     .getElementById(idElements.id_f_edit)
     .addEventListener('submit', editTags)
+
+  document
+    .getElementById(idElements.id_f_edit)
+    .addEventListener('reset', resetRead)
 
   vinculateSwitch(idElements.id_btn_expdate, idElements.id_e_expdate)
   vinculateSwitch(idElements.id_btn_recdate, idElements.id_e_recdate)
@@ -44,6 +54,10 @@ export const initializeEvents = () => {
   document
     .getElementById(idElements.id_btn_autoLot)
     .addEventListener('click', generateLot)
+
+  document
+    .getElementById(idElements.id_btn_personalize)
+    .addEventListener('click', personalizeLot)
 
   document
     .getElementById('btn-get-historial')
@@ -67,6 +81,7 @@ export const initializeEvents = () => {
   iTurn.addEventListener('input', setLot)
 
   iExpirationDays.addEventListener('input', expirationDate)
+  irExpirationDays.addEventListener('input', setNewExpirationDate)
 
   setValidations()
 }

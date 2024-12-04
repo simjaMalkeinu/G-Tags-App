@@ -3,6 +3,7 @@ import { getLocalStorage } from '../config/storage.js'
 import { getInputs } from '../components/inputs/getInput.js'
 import { updateQr } from '../components/qr/qr.js'
 import { formatingLot } from './configurateLot.js'
+import idElements from '../../utils/idElements.js'
 
 export const generateLot = () => {
   const { day: today } = getLocalStorage()
@@ -32,4 +33,22 @@ export const generateLot = () => {
   iTurn.value = shiftLetter
 
   updateQr()
+}
+
+export const personalizeLot = () => {
+  const { iDateLot, iTurn, iLot } = getInputs()
+
+  const eDate = document.getElementById(idElements.id_e_date)
+  const eShift = document.getElementById(idElements.id_e_shift)
+  const btnPersonalize = document.getElementById(idElements.id_btn_personalize)
+
+  eDate.hidden = !eDate.hidden
+  eShift.hidden = !eShift.hidden
+
+  iDateLot.value = ''
+  iTurn.value = 'A'
+  iLot.value = ''
+  iLot.disabled = !iLot.disabled
+
+  btnPersonalize.innerHTML = eDate.hidden ? 'Usar lote automatico' : 'Personalizar lote'
 }

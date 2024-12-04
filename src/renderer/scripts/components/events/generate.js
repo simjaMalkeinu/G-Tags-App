@@ -14,8 +14,9 @@ import idElements from '../../../utils/idElements.js'
 import { getSwitchs } from '../buttons.js/checkbox.js'
 import { validateStandar, validateTotalQty } from '../validation/quantities.js'
 import { registerGeneration } from '../../db.js'
+import { getCurrentDate } from '../../functions/getDate.js'
 
-export const generateNewTags = e => {
+export const generateNewTags = async e => {
   e.preventDefault()
 
   // validar los datos
@@ -260,29 +261,44 @@ export const generateNewTags = e => {
   // localStorage.setItem('Invoice', invoice + parseInt(cantEtiquetas, 10))
   setLocalStorage('invoice', invoice + parseInt(cantEtiquetas, 10))
 
-  // Guarda o descarga el PDF al finalizar el bucle
-  doc.save(`TAGS-${gNumPart}${gOperation}.pdf`)
+  await getCurrentDate()
+    .then(currentDate => {
+      const today = new Date(currentDate)
 
-  registerGeneration({
-    tipo: 'Generado',
-    planta: plant,
-    area,
-    num_part: gNumPart,
-    numero_etiquetas: cantEtiquetas,
-    inicio_seriado: invoice,
-    final_seriado: invoice + parseInt(cantEtiquetas, 10) - 1
-  })
+      const docDate = `${today.getDate().toString().padStart(2, '0')}-${(
+        today.getMonth() + 1
+      )
+        .toString()
+        .padStart(2, '0')}-${today.getFullYear()} (${today.getHours()}_${today
+        .getMinutes()
+        .toString()
+        .padStart(2, '0')})`
 
-  const text = validateRC ? ' el RC ' : 'la CLAVE UEPS '
+      // Guarda o descarga el PDF al finalizar el bucle
+      doc.save(`TAG-${gNumPart} ${validateRC ? `(OP-${gOperation})` : ''} ${docDate}.pdf`)
 
-  M.toast({
-    html:
-      'Etiquetas generadas exitosamente con ' +
-      text +
-      '<strong> ' +
-      gNumPart +
-      '</strong>',
-    displayLength: 2500, // Duración en milisegundos (default: 4000)
-    classes: 'rounded' // Clase adicional para dar estilo
-  })
+      registerGeneration({
+        tipo: 'Generado',
+        planta: plant,
+        area,
+        num_part: gNumPart,
+        numero_etiquetas: cantEtiquetas,
+        inicio_seriado: invoice,
+        final_seriado: invoice + parseInt(cantEtiquetas, 10) - 1
+      })
+
+      const text = validateRC ? ' el RC ' : 'la CLAVE UEPS '
+
+      M.toast({
+        html:
+          'Etiquetas generadas exitosamente con ' +
+          text +
+          '<strong> ' +
+          gNumPart +
+          '</strong>',
+        displayLength: 2500, // Duración en milisegundos (default: 4000)
+        classes: 'rounded' // Clase adicional para dar estilo
+      })
+    })
+    .catch(err => console.log(err))
 }

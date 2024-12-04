@@ -10,7 +10,7 @@ const db = new sqlite3.Database(dbPath, err => {
   if (err) {
     console.error('Error al conectar con la base de datos:', err.message)
   } else {
-    console.log('Conectado a la base de datos SQLite.')
+    // console.log('Conectado a la base de datos SQLite.')
     crearTablas()
     addColumnIfNotExists('registros', 'tipo', 'TEXT NOT NULL')
     addColumnIfNotExists('registros', 'part_num', 'TEXT NOT NULL')
@@ -107,7 +107,7 @@ function insertarRegistro (registro) {
       registro.final_seriado
     ]
 
-    console.log(params)
+    // console.log(params)
 
     db.run(query, params, function (err) {
       if (err) {

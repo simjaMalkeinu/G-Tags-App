@@ -10,6 +10,7 @@ import { setValidations } from '../validation/validations.js'
 import { editTags } from './edit.js'
 import { generateNewTags } from './generate.js'
 import { printHistory } from './printHistory.js'
+import { resetGenerate, resetRead } from './resets.js'
 import { vinculateSwitch } from './switch.js'
 
 export const initializeEvents = () => {
@@ -30,8 +31,16 @@ export const initializeEvents = () => {
     .addEventListener('submit', generateNewTags)
 
   document
+    .getElementById(idElements.id_f_generate)
+    .addEventListener('reset', resetGenerate)
+
+  document
     .getElementById(idElements.id_f_edit)
     .addEventListener('submit', editTags)
+
+  document
+    .getElementById(idElements.id_f_edit)
+    .addEventListener('reset', resetRead)
 
   vinculateSwitch(idElements.id_btn_expdate, idElements.id_e_expdate)
   vinculateSwitch(idElements.id_btn_recdate, idElements.id_e_recdate)

@@ -1,6 +1,6 @@
 import idElements from '../../../utils/idElements.js'
 import { getHistory } from '../../db.js'
-import { expirationDate } from '../../functions/expirationDate.js'
+import { expirationDate, setNewExpirationDate } from '../../functions/expirationDate.js'
 import { generateLot, personalizeLot } from '../../functions/generateLot.js'
 import { setLot } from '../../functions/setLot.js'
 import { getInputs } from '../inputs/getInput.js'
@@ -23,7 +23,8 @@ export const initializeEvents = () => {
     iUnit,
     iDateLot,
     iTurn,
-    iExpirationDays
+    iExpirationDays,
+    irExpirationDays
   } = getInputs()
 
   document
@@ -80,6 +81,7 @@ export const initializeEvents = () => {
   iTurn.addEventListener('input', setLot)
 
   iExpirationDays.addEventListener('input', expirationDate)
+  irExpirationDays.addEventListener('input', setNewExpirationDate)
 
   setValidations()
 }

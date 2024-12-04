@@ -12,4 +12,5 @@ export const resetRead = () => {
   document.getElementById(idElements.id_e_r_expdate).hidden = true
   document.getElementById(idElements.id_e_r_recdate).hidden = true
   document.getElementById(idElements.id_e_r_secuence).hidden = true
+  document.getElementById(idElements.id_extra_data_ueps).hidden = true
 }

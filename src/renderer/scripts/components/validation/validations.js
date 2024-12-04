@@ -1,4 +1,5 @@
 import { getInputs } from '../inputs/getInput.js'
+import { activateExtraData } from './editNumPart.js'
 import {
   validateExpDate,
   validateRecDate,
@@ -18,10 +19,13 @@ export const setValidations = () => {
     iTotalQuantity,
     iExpirationDays,
     iSecuence,
-    iReceivedDate
+    iReceivedDate,
+    irNumPart
   } = getInputs()
 
   iNumPart.addEventListener('input', validateNumPart)
+  irNumPart.addEventListener('input', activateExtraData)
+
   iOperation.addEventListener('input', validateOperation)
   iLot.addEventListener('input', validateLot)
   iStandar.addEventListener('input', validateStandar)

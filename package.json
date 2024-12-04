@@ -1,6 +1,6 @@
 {
   "name": "tags-app-electron",
-  "version": "v1.4.6",
+  "version": "v1.4.7",
   "description": "",
   "author": "Simja",
   "main": "./src/main/main.js",

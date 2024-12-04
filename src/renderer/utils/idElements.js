@@ -34,5 +34,6 @@ export default {
   id_btn_r_secuence: 'r-switch-activate-secuence',
   id_e_r_recdate: 'r-input-date-reception',
   id_e_r_expdate: 'r-input-expiration-date',
-  id_e_r_secuence: 'r-input-secuence'
+  id_e_r_secuence: 'r-input-secuence',
+  id_extra_data_ueps: 'id-extra-data-ueps'
 }

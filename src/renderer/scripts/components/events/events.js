@@ -1,7 +1,7 @@
 import idElements from '../../../utils/idElements.js'
 import { getHistory } from '../../db.js'
 import { expirationDate } from '../../functions/expirationDate.js'
-import { generateLot } from '../../functions/generateLot.js'
+import { generateLot, personalizeLot } from '../../functions/generateLot.js'
 import { setLot } from '../../functions/setLot.js'
 import { getInputs } from '../inputs/getInput.js'
 import { printPDF, savePDF } from '../pdfs/eventsPDF.js'
@@ -44,6 +44,10 @@ export const initializeEvents = () => {
   document
     .getElementById(idElements.id_btn_autoLot)
     .addEventListener('click', generateLot)
+
+  document
+    .getElementById(idElements.id_btn_personalize)
+    .addEventListener('click', personalizeLot)
 
   document
     .getElementById('btn-get-historial')

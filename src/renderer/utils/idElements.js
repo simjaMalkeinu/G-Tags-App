@@ -27,6 +27,7 @@ export default {
   id_c_lot: 'c-lot',
   id_c_quantity: 'c-quantity',
   id_c_operation: 'c-operation',
+  id_btn_personalize: 'btn-personalize-lot',
   //
   id_btn_r_expdate: 'r-switch-activate-expiration-date',
   id_btn_r_recdate: 'r-switch-activate-print-date',

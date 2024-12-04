@@ -147,13 +147,12 @@
                   <option value="A" selected>A</option>
                   <option value="B">B</option>
                   <option value="C">C</option>
-                  <option value="D">D</option>
                 </select>
               </div>
 
               <!-- Lote y generar automaticamente -->
-              <div class="flex-1 flex gap-2 items-end flex-wrap">
-                <div>
+              <div class="flex-1 flex gap-2 items-end justify-end flex-wrap">
+                <div class="w-full">
                   <label class="block text-gray-800 text-sm font-bold mb-2" for="g-lot">
                     Lote
                   </label>
@@ -167,6 +166,12 @@
                   type="button">
                   Lote Automático
                 </button>
+
+                <button id="btn-personalize-lot"
+                  class="w-full max-w-[220px] px-6 py-2 text-sm font-medium text-yellow-500 border-yellow-400  rounded-md hover:bg-yellow-800 hover:text-white hover:border-yellow-800 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 transition h-min border-2"
+                  type="button">
+                  Personalizar lote
+                </button> 
 
               </div>
             </div>

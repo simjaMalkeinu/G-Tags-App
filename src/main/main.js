@@ -20,11 +20,15 @@ function createMainWindow () {
     minHeight: 900, // Alto mínimo
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-      nodeIntegration: false
+      nodeIntegration: false,
+      contextIsolation: true
     }
   })
 
-  mainWindow.loadFile(path.join(__dirname, routes.index))
+  // mainWindow.loadFile(path.join(__dirname, routes.index))
+  // Cargar React en desarrollo
+  mainWindow.loadURL('http://localhost:5173')
+  // mainWindow.loadFile(path.join(__dirname, '../dist', 'index.html'))
 
   // Manejar eventos de descarga
   setupDownloadHandler(mainWindow)

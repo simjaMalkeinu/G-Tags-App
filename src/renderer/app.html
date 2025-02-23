@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de etiquetas</title>
+
+  <!-- Importar Tailwind -->
+  <link rel="stylesheet" href="./styles/output.css">
+
+  <!-- Iconos de FontAwesome -->
+  <link rel="stylesheet" href="./styles/fontawesome/css/all.min.css">
+
+  <!-- Toast Materialize -->
+  <link rel="stylesheet" href="./styles//materialize/toast.css">
+
+  <!-- Personal Styles -->
+  <link rel="stylesheet" href="./styles/main.css">
+</head>
+
+<body class="flex h-screen bg-gray-200 text-gray-800">
+
+  <!-- Sidebar -->
+  <aside id="sidebar"
+    class="flex flex-col items-center bg-gray-800 text-white w-64 transition-all duration-300 ease-in-out"
+    :class="{'w-16': isCollapsed}">
+    <!-- Encabezado del slider -->
+    <div class="py-4 flex flex-col items-center">
+      <div class="icon-app flex items-center gap-2">
+        <i class="fa-solid fa-desktop text-3xl"></i>
+        <p id="sidebar-title" class="text-lg font-semibold">Generate Tag App</p>
+      </div>
+    </div>
+
+    <!-- Menú del slider -->
+    <nav class=" flex flex-col items-center gap-6 mt-4 w-full">
+      <a href="#" data-route="generateTag" title-route="Generar etiquetas"
+        class="flex gap-2 w-4/5 px-4 py-2 hover:bg-gray-700 rounded transition-all">
+        <i class="fa-solid fa-tags text-xl sidebar-icon"></i>
+        <b class="sidebar-text text-sm">Generar etiqueta</b>
+      </a>
+      <a href="#" data-route="readTag" title-route="Modificar una etiqueta"
+        class="flex gap-2 w-4/5 px-4 py-2 hover:bg-gray-700 rounded transition-all">
+        <i class="fa-solid fa-pen-to-square text-xl sidebar-icon"></i>
+        <b class="sidebar-text text-sm">Leer etiqueta</b>
+      </a>
+      <a href="#" data-route="historial" title-route="Historial de etiquetas"
+        class="flex gap-2 w-4/5 px-4 py-2 hover:bg-gray-700 rounded transition-all">
+        <i class="fa-solid fa-book text-xl sidebar-icon"></i>
+        <b class="sidebar-text text-sm">Historial</b>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main
+    class="flex flex-col flex-grow px-6  gap-2 h-lvh overflow-hidden overflow-y-auto scrollbar-thin scrollbar-thumb-gray-800">
+    <header class="flex justify-between items-center bg-gray-200 sticky top-0 z-50 pt-6 px-4">
+      <!-- Botón para alternar tamaño -->
+      <button id="toggle-btn" class="px-4 py-2 bg-gray-700 hover:bg-blue-500 rounded text-white">
+        <!-- <i class="fa-solid fa-bars"></i> -->
+        <i class="fa-solid fa-arrow-left" id="icon-menu"></i>
+      </button>
+
+      <!-- Titulo de la pagina -->
+      <h1 class="uppercase"><b id="page-title">Generar etiquetas</b></h1>
+
+      <!-- Icono de estatus -->
+      <div id="status"
+        class="status bg-slate-400 text-white rounded-full py-2 px-4 grid place-items-center space-y-1 shadow-md w-16 h-16">
+        <strong id="status-icon" class="text-lg">
+          <i class="fa-solid fa-signal"></i>
+        </strong>
+        <p id="status-text" class="text-xs font-semibold">Online</p>
+      </div>
+
+
+    </header>
+    <!-- Contenido -->
+    <div class="flex-1">
+      <!-- Ruta para generar etiquetas nuevas -->
+      <div id="generateTag" class="page-route">
+
+        <!-- Configuracion para planta y area -->
+        <div class="flex space-x-4 items-center mb-2">
+          <!-- Dropdown Planta -->
+          <div class="relative">
+            <label for="dropdown-plant" class="block text-sm font-medium text-gray-700">Planta</label>
+            <select id="dropdown-plant"
+              class="mt-1 block bg-white w-48 rounded-md border-gray-300 shadow-sm focus:border-gray-800 focus:ring-gray-800 sm:text-sm py-3 pl-2">
+              <option value="">Selecciona una planta</option>
+              <option value="V1">Vulcanizado 1</option>
+              <option value="V2">Vulcanizado 2</option>
+              <option value="CA">Cafetal</option>
+              <option value="HU">Hules</option>
+            </select>
+          </div>
+
+          <!-- Dropdown Área -->
+          <div class="relative">
+            <label for="dropdown-area" class="block text-sm font-medium text-gray-700">Área</label>
+            <select id="dropdown-area"
+              class="mt-1 block w-48 rounded-md border-gray-300 shadow-sm focus:border-gray-800 focus:ring-gray-800 sm:text-sm py-3 pl-2">
+              <option value="">Selecciona un área</option>
+              <option value="produccion">Producción</option>
+              <option value="mantenimiento">Mantenimiento</option>
+              <option value="calidad">Calidad</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <form id="f-generate" class="bg-white shadow-md rounded px-8 pt-6 pb-8 flex-1 min-w-[401px]">
+            <!-- Numero de parte -->
+            <div class="mb-4">
+              <label class="block text-gray-800 text-sm font-bold mb-2" for="g-num-part">
+                Numero de parte
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1"
+                id="g-num-part" type="text" placeholder="Enter a number part" />
+              <span id="msg-num-part" class="pr-2"></span>
+            </div>
+
+            <!-- generar lote -->
+            <div class="flex gap-2 mb-2 flex-wrap">
+              <!-- Custom Lote -->
+              <!-- Fecha del lote -->
+              <div id="e-date">
+                <label class="block text-gray-800 text-sm font-bold mb-2" for="g-date-lot">
+                  Fecha del lote
+                </label>
+                <input
+                  class="shadow border rounded py-1.5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="g-date-lot" type="date" />
+              </div>
+
+              <!-- Turno -->
+              <div id="e-shift">
+                <label class="block text-gray-800 text-sm font-bold mb-2" for="g-turn">
+                  Turno
+                </label>
+                <select
+                  class="shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="g-turn">
+                  <option value="A" selected>A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                </select>
+              </div>
+
+              <!-- Lote y generar automaticamente -->
+              <div class="flex-1 flex gap-2 items-end justify-end flex-wrap">
+                <div class="w-full">
+                  <label class="block text-gray-800 text-sm font-bold mb-2" for="g-lot">
+                    Lote
+                  </label>
+                  <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="g-lot" type="text" placeholder="121224A" disabled />
+                </div>
+                <span id="msg-lot" class="block w-full"></span>
+                <button id="btn-generate-lot"
+                  class="w-full max-w-[220px] px-6 py-2 text-sm font-medium text-gray-500 border-gray-400  rounded-md hover:bg-gray-800 hover:text-white hover:border-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transition h-min border-2"
+                  type="button">
+                  Lote Automático
+                </button>
+
+                <button id="btn-personalize-lot"
+                  class="w-full max-w-[220px] px-6 py-2 text-sm font-medium text-yellow-500 border-yellow-400  rounded-md hover:bg-yellow-800 hover:text-white hover:border-yellow-800 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 transition h-min border-2"
+                  type="button">
+                  Personalizar lote
+                </button>
+
+              </div>
+            </div>
+
+            <!-- Operacion -->
+            <div class="mb-4" id="e-operation">
+              <label class="block text-gray-800 text-sm font-bold mb-2" for="g-operation">
+                Operacion
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="g-operation" type="text" placeholder="Enter a operacion (10,20,30,40,...)" />
+              <span id="msg-operation"></span>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mb-4">
+              <!-- Cantidad total de piezas  -->
+              <div class="max-w-80 w-full">
+                <label class="block text-gray-800 text-sm font-bold mb-2" for="g-total-quantity">
+                  Cantidad total de piezas
+                </label>
+                <input
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="g-total-quantity" type="number" placeholder="Enter the total quantity" />
+                <span id="msg-total-qty"></span>
+              </div>
+
+              <!-- Unidad -->
+              <div>
+                <label class="block text-gray-800 text-sm font-bold mb-2" for="g-unit">
+                  Tipo
+                </label>
+                <select
+                  class="shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="g-unit">
+                  <option value="PZ" selected>Piezas</option>
+                  <option value="LT">Litros</option>
+                  <option value="KG">Kilos</option>
+                  <option value="MT">Metros</option>
+                  <option value="TR">Tiras</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Cantidad de piezas estandar por contenedor  -->
+            <div class="mb-6">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="g-standar">
+                Cantidad por contenedor
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="g-standar" type="number" placeholder="Enter the standar" />
+              <span id="msg-standar"></span>
+            </div>
+
+            <!-- Activar caducidad -->
+            <div class="mb-4">
+              <div class="flex items-center gap-3">
+                <label for="switch-activate-expiration-date" class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" id="switch-activate-expiration-date" class="sr-only peer" />
+                  <div
+                    class="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-white rounded-full peer-checked:bg-gray-800">
+                  </div>
+                  <div
+                    class="absolute left-1 top-1 w-4 h-4 bg-white border border-gray-300 rounded-full transition-transform peer-checked:translate-x-5 peer-checked:border-gray-800">
+                  </div>
+                </label>
+                <span class="text-sm font-medium text-gray-700">Incluir Caducidad</span>
+              </div>
+            </div>
+
+            <!-- Caducidad  -->
+            <div id="input-expiration-date" class="mb-4 transition" hidden>
+              <label class="block text-gray-800 text-sm font-bold mb-2" for="g-expiration-date">
+                Caducidad
+              </label>
+              <div class="flex mb-2">
+                <span class="shadow border rounded min-w-32 py-2 px-3 text-white leading-tight bg-gray-700">
+                  Dias</span>
+                <input
+                  class="shadow appearance-none border rounded w-auto min-w-16 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="g-expiration-days" type="number" placeholder="Caduca en:" />
+              </div>
+              <div class="flex">
+                <span class="shadow border rounded min-w-32 py-2 px-3 text-white leading-tight bg-gray-700">
+                  Caduca el:</span>
+                <input
+                  class="shadow appearance-none border rounded w-auto min-w-16 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="g-expiration-date" type="text" placeholder="MM/DD/YYYY" disabled />
+              </div>
+              <span id="msg-expiration-date"></span>
+            </div>
+
+            <!-- Activar fecha de recepcion -->
+            <div id="e-reception" hidden>
+              <!-- Activar fecha de recepcion  -->
+              <div class="mb-4">
+                <div class="flex items-center gap-3">
+                  <label for="switch-activate-print-date" class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="switch-activate-print-date" class="sr-only peer" />
+                    <div
+                      class="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-white rounded-full peer-checked:bg-gray-800">
+                    </div>
+                    <div
+                      class="absolute left-1 top-1 w-4 h-4 bg-white border border-gray-300 rounded-full transition-transform peer-checked:translate-x-5 peer-checked:border-gray-800">
+                    </div>
+                  </label>
+                  <span class="text-sm font-medium text-gray-700">Incluir fecha de recepcion</span>
+                </div>
+              </div>
+
+              <!-- fecha de recepcion -->
+              <div id="input-date-reception" class="mb-4 transition" hidden>
+                <label class="block text-gray-800 text-sm font-bold mb-2" for="g-reception-date">
+                  Fecha de recepcion (<span class="text-gray-500 font-normal">Seleccione la fecha con el
+                    calendario</span>)
+                </label>
+                <input
+                  class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1"
+                  id="g-reception-date" type="date" onkeydown="return false;" />
+                <span id="msg-reception-date" class="w-full block"></span>
+              </div>
+            </div>
+
+            <!-- Activar secuencia -->
+            <div id="e-secuence" hidden>
+              <!-- Activar secuencia de etiquetado -->
+              <div class="mb-4">
+                <div class="flex items-center gap-3">
+                  <label for="switch-activate-secuence" class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="switch-activate-secuence" class="sr-only peer" />
+                    <div
+                      class="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-white rounded-full peer-checked:bg-gray-800">
+                    </div>
+                    <div
+                      class="absolute left-1 top-1 w-4 h-4 bg-white border border-gray-300 rounded-full transition-transform peer-checked:translate-x-5 peer-checked:border-gray-800">
+                    </div>
+                  </label>
+                  <span class="text-sm font-medium text-gray-700">Incluir secuencia de etiquetado</span>
+                </div>
+              </div>
+
+              <!-- secuencia de etiquetado  -->
+              <div id="input-secuence" class="mb-4 transition" hidden>
+                <label class="block text-gray-800 text-sm font-bold mb-2" for="g-secuence">
+                  Observaciones adicionales
+                </label>
+                <input
+                  class="shadow appearance-none border rounded w-full min-w-16 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="g-secuence" type="text" placeholder="Caduca en:" />
+                <span id="msg-secuence" class="pl-2">Las observaciones se repetiran en todas las etiquetas</span>
+              </div>
+            </div>
+
+            <!-- Botones de formulario -->
+            <div class="flex items-center justify-start gap-4">
+              <!-- Boton para generar -->
+              <button
+                class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition"
+                type="submit">
+                Generar etiquetas
+              </button>
+
+              <!-- boton para limpiar -->
+              <button
+                class="bg-gray-200 hover:bg-gray-500 border-2 border-gray-500 text-gray-800 hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition"
+                type="reset">
+                Limpiar formulario
+              </button>
+            </div>
+          </form>
+
+          <!-- Tarjeta previsualizacion -->
+          <div
+            class="max-w-xl max-h-56 min-w-[430px] mx-auto bg-white border border-gray-200 shadow-md rounded p-4 flex flex-wrap items-center">
+            <!-- Información a la izquierda -->
+            <div class="flex-1">
+              <h2 class="text-lg font-semibold text-gray-700">Etiqueta de Material</h2>
+              <ul class="mt-2 space-y-1 text-sm text-gray-600">
+                <li><strong>Material:</strong> <span id="c-num-part"></span></li>
+                <li><strong>Lote:</strong> <span id="c-lot"></span></li>
+                <li><strong>Cantidad:</strong> <span id="c-quantity"></span></li>
+                <li><strong>Operacion:</strong> <span id="c-operation"></span></li>
+              </ul>
+            </div>
+
+            <!-- QR a la derecha -->
+            <div class="flex-shrink-0">
+              <div class="w-44 h-44 p-2 bg-gray-100 border border-gray-300 rounded-lg grid place-items-center">
+                <!-- Contenedor del QR -->
+                <div id="qr-code" class="w-full h-full"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Editar etiqueta -->
+      <div id="readTag" class="page-route h-full">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
+          <!-- Formulario -->
+          <form id="f-edit" class="bg-white shadow-md rounded px-4 pt-6 pb-8 w-full h-min">
+
+            <h1 class="mb-4"><span class="bg-cyan-950 px-2 py-1 rounded text-white">NOTA:</span> Para visualizar la
+              etiqueta precionar la tecla 'Enter' o precionar el boton de ver previsualizacion</h1>
+
+            <!-- Folio de la etiqueta -->
+            <div class="mb-4">
+              <label class="block text-gray-800 text-sm font-bold mb-2" for="r-folio">
+                Folio de la etiqueta
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1"
+                id="r-folio" type="text" placeholder="CA001-0001" />
+              <span id="msg-r-folio" class="pr-2"></span>
+            </div>
+
+            <!-- Numero de parte -->
+            <div class="mb-4">
+              <label class="block text-gray-800 text-sm font-bold mb-2" for="r-num-part">
+                Numero de parte
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1"
+                id="r-num-part" type="text" placeholder="10101C1223 O T0460-0" />
+              <span id="msg-r-num-part" class="pr-2"></span>
+            </div>
+
+            <!-- Lot -->
+            <div class="mb-4">
+              <label class="block text-gray-800 text-sm font-bold mb-2" for="r-lot">
+                Lote
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1"
+                id="r-lot" type="text" placeholder="010124A" />
+              <span id="msg-r-lot" class="pr-2"></span>
+            </div>
+
+            <!-- Canidad -->
+            <div class="mb-4">
+              <label class="block text-gray-800 text-sm font-bold mb-2" for="r-quantity">
+                Cantidad
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1"
+                id="r-quantity" type="text" placeholder="100" />
+              <span id="msg-r-quantity" class="pr-2"></span>
+            </div>
+
+            <!-- Unidad -->
+            <div class="mb-4">
+              <label class="block text-gray-800 text-sm font-bold mb-2" for="r-unit">
+                Tipo
+              </label>
+              <select
+                class="shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="r-unit">
+                <option value="" selected>Selecciona una opcion</option>
+                <option value=" PZ">Piezas</option>
+                <option value=" LT">Litros</option>
+                <option value=" KG">Kilos</option>
+                <option value=" MT">Metros</option>
+                <option value=" TR">Tiras</option>
+              </select>
+              <span id="msg-r-unit"></span>
+            </div>
+
+            <!-- Operacion -->
+            <div class="mb-4">
+              <label class="block text-gray-800 text-sm font-bold mb-2" for="r-operation">
+                Operacion
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1"
+                id="r-operation" type="text" placeholder="10,20,30,..." />
+              <span id="msg-r-operation" class="pr-2"></span>
+            </div>
+
+            <!-- ExtraData -->
+            <div class="mb-4">
+              <label class="block text-gray-800 text-sm font-bold mb-2" for="r-register">
+                Registro
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1"
+                id="r-register" type="text" placeholder="" />
+              <span id="msg-r-register" class="pr-2"></span>
+            </div>
+
+            <!-- Activar caducidad -->
+            <div class="mb-4">
+              <div class="flex items-center gap-3">
+                <label for="r-switch-activate-expiration-date" class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" id="r-switch-activate-expiration-date" class="sr-only peer" />
+                  <div
+                    class="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-white rounded-full peer-checked:bg-gray-800">
+                  </div>
+                  <div
+                    class="absolute left-1 top-1 w-4 h-4 bg-white border border-gray-300 rounded-full transition-transform peer-checked:translate-x-5 peer-checked:border-gray-800">
+                  </div>
+                </label>
+                <span class="text-sm font-medium text-gray-700">Incluir Caducidad</span>
+              </div>
+            </div>
+
+            <!-- Caducidad  -->
+            <div id="r-input-expiration-date" class="mb-4 transition" hidden>
+              <label class="block text-gray-800 text-sm font-bold mb-2" for="r-expiration-date">
+                Caducidad
+              </label>
+              <!-- Dias para caducar -->
+              <div class="flex mb-2">
+                <span class="shadow border rounded min-w-32 py-2 px-3 text-white leading-tight bg-gray-700">
+                  Dias</span>
+                <input
+                  class="shadow appearance-none border rounded w-auto min-w-16 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="r-expiration-days" type="number" placeholder="Caduca en:" />
+              </div>
+
+              <!-- Fecha de caducidad -->
+              <div class="flex">
+                <span class="shadow border rounded min-w-32 py-2 px-3 text-white leading-tight bg-gray-700">
+                  Caduca el:</span>
+                <input
+                  class="shadow appearance-none border rounded w-auto min-w-16 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="r-expiration-date" type="text" placeholder="MM/DD/YYYY" disabled />
+              </div>
+              <span id="msg-r-expiration-date"></span>
+            </div>
+
+            <!-- Extra data UEPS -->
+            <div id="id-extra-data-ueps" hidden>
+              <!-- Activar fecha de recepcion  -->
+              <div class="mb-4">
+                <div class="flex items-center gap-3">
+                  <label for="r-switch-activate-print-date" class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="r-switch-activate-print-date" class="sr-only peer" />
+                    <div
+                      class="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-white rounded-full peer-checked:bg-gray-800">
+                    </div>
+                    <div
+                      class="absolute left-1 top-1 w-4 h-4 bg-white border border-gray-300 rounded-full transition-transform peer-checked:translate-x-5 peer-checked:border-gray-800">
+                    </div>
+                  </label>
+                  <span class="text-sm font-medium text-gray-700">Incluir fecha de recepcion</span>
+                </div>
+              </div>
+
+              <!-- fecha de recepcion -->
+              <div id="r-input-date-reception" class="mb-4 transition" hidden>
+                <label class="block text-gray-800 text-sm font-bold mb-2" for="r-reception-date">
+                  Fecha de recepcion (<span class="text-gray-500 font-normal">Seleccione la fecha con el
+                    calendario</span>)
+                </label>
+                <input
+                  class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1"
+                  id="r-reception-date" type="date" onkeydown="return false;" />
+                <span id="msg-r-reception-date" class="w-full block"></span>
+              </div>
+
+              <!-- Activar secuencia de etiquetado -->
+              <div class="mb-4">
+                <div class="flex items-center gap-3">
+                  <label for="r-switch-activate-secuence" class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="r-switch-activate-secuence" class="sr-only peer" />
+                    <div
+                      class="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-white rounded-full peer-checked:bg-gray-800">
+                    </div>
+                    <div
+                      class="absolute left-1 top-1 w-4 h-4 bg-white border border-gray-300 rounded-full transition-transform peer-checked:translate-x-5 peer-checked:border-gray-800">
+                    </div>
+                  </label>
+                  <span class="text-sm font-medium text-gray-700">Incluir secuencia de etiquetado</span>
+                </div>
+              </div>
+
+              <!-- secuencia de etiquetado  -->
+              <div id="r-input-secuence" class="mb-4 transition" hidden>
+                <label class="block text-gray-800 text-sm font-bold mb-2" for="r-secuence">
+                  Observaciones adicionales
+                </label>
+                <input
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1"
+                  id="r-secuence" type="text" placeholder="C" />
+                <span id="msg-r-secuence" class="block">Las observaciones se repetiran en todas las etiquetas</span>
+              </div>
+            </div>
+
+            <!-- Botones de formulario -->
+            <div class="flex items-center justify-between gap-4 pt-4">
+
+              <!-- Boton ver tag -->
+              <button
+                class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition"
+                type="submit">
+                Ver etiqueta
+              </button>
+
+              <!-- boton para limpiar -->
+              <button
+                class="bg-gray-200 hover:bg-gray-500 border-2 border-gray-500 text-gray-800 hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition"
+                type="reset">
+                Limpiar formulario
+              </button>
+            </div>
+
+            <div id="r-qr-code" hidden></div>
+
+          </form>
+
+          <div class="h-full flex flex-col">
+            <div class="flex gap-4 mb-4">
+              <!-- Botón para guardar el PDF -->
+              <button id="save-pdf-btn"
+                class="flex items-center px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 transition">
+                <i class="fas fa-save mr-2"></i>
+                Guardar etiqueta
+              </button>
+
+              <!-- Botón para imprimir el PDF -->
+              <button id="print-pdf-btn"
+                class="flex items-center px-4 py-2 bg-green-800 text-white rounded shadow hover:bg-green-600 transition">
+                <i class="fas fa-print mr-2"></i>
+                Imprimir etiqueta
+              </button>
+            </div>
+
+
+            <!-- Columna derecha: Previsualización PDF -->
+            <div class="border border-gray-300 rounded-lg max-h-96 max-w-[400] flex-1">
+              <iframe id="pdf-preview" class="w-full h-full rounded"></iframe>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Ver historial -->
+      <div id="historial" class="page-route">
+        <!-- Botón de consulta -->
+        <div class="flex gap-2 mb-6">
+          <button id="btn-get-historial"
+            class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition"
+            type="submit">
+            Obtener el historial de impreciones
+          </button>
+
+          <button id="btn-print-historial" hidden
+            class="bg-gray-200 hover:bg-gray-500 border-2 border-gray-500 text-gray-800 hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition"
+            type="reset">
+            Imprimir historial
+          </button>
+        </div>
+
+        <!-- Loader (oculto por defecto) -->
+        <div id="loader" class="justify-center items-center hidden">
+          <svg class="animate-spin h-8 w-8 text-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+          </svg>
+        </div>
+
+        <!-- Tabla de datos -->
+        <div class="w-full max-w-7xl mx-auto">
+          <table id="data-table" class="min-w-full bg-white rounded-lg shadow-lg hidden transition-all">
+            <thead>
+              <tr class="bg-gray-800 text-white text-center">
+                <th class="px-4 py-2">ID</th>
+                <th class="px-4 py-2">Tipo</th>
+                <th class="px-4 py-2">Fecha</th>
+                <th class="px-4 py-2">Hora</th>
+                <th class="px-4 py-2">Planta</th>
+                <th class="px-4 py-2">Área</th>
+                <th class="px-4 py-2">Numero de parte</th>
+                <th class="px-4 py-2">Cantidad de Etiquetas</th>
+                <th class="px-4 py-2" colspan="3">Folios</th>
+              </tr>
+            </thead>
+            <tbody id="table-body" class="text-center">
+              <!-- Aquí se agregarán las filas dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <!-- Libreria de materialize -->
+  <script src="./scripts/libraries/materialize/materialize.min.js"></script>
+
+  <!-- Librerias para generar el PDF -->
+  <script src="./scripts/libraries/jsPDF/jspdf.umd.min.js"></script>
+  <script src="./scripts/libraries/jsPDF/jspdf.plugin.autotable.js"></script>
+
+  <!-- Libraria de QR -->
+  <script src="./scripts/libraries/qrcode.min.js"></script>
+
+  <!-- Renderizador de eventos de electron -->
+  <script src="./scripts/renderer.js" defer></script>
+
+  <!-- Espacio de trabajo -->
+  <script type="module" src="./scripts/workSpace.js" defer></script>
+</body>
+
+</html>

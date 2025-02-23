@@ -5,6 +5,14 @@
   font-family: "Roboto", sans-serif;
 }
 
+#svg-bg{
+  width: 100lvw;
+  height: 100lvh;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
 /* Ajustes personalizados */
 .icon-app i {
   margin-right: 8px;

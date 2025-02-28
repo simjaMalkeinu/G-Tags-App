@@ -72,5 +72,13 @@
   },
   "eslintConfig": {
     "extends": "standard"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@heroui/shared-utils",
+      "electron",
+      "esbuild",
+      "sqlite3"
+    ]
   }
 }

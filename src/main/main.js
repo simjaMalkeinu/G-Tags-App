@@ -24,7 +24,14 @@ function createMainWindow () {
     }
   })
 
-  mainWindow.loadFile(path.join(__dirname, routes.index))
+  // Cargar la página principal de la aplicación sin react
+  // mainWindow.loadFile(path.join(__dirname, routes.index))
+
+  // Cargar la página principal de la aplicación con react
+  mainWindow.loadFile(path.join(__dirname, "../renderer/app/dist/index.html"))
+
+  // Cargar la página principal de la aplicación desde desarrollo con vite
+  // mainWindow.loadURL('http://localhost:5173/')
 
   // Manejar eventos de descarga
   setupDownloadHandler(mainWindow)

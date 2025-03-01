@@ -58,5 +58,11 @@
   },
   "eslintConfig": {
     "extends": "standard"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "electron",
+      "sqlite3"
+    ]
   }
 }

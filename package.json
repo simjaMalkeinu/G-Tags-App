@@ -43,6 +43,7 @@
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.2",
     "electron": "^26.6.10",
     "electron-builder": "^25.1.8",
     "postcss": "^8.5.3",

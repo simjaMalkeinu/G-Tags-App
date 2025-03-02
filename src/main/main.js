@@ -28,10 +28,16 @@ function createMainWindow () {
   // mainWindow.loadFile(path.join(__dirname, routes.index))
 
   // Cargar la página principal de la aplicación con react
-  // mainWindow.loadFile(path.join(__dirname, "../renderer/app/dist/index.html"))
+  // mainWindow.loadFile(path.join(__dirname, '../renderer-app/dist/index.html'))
 
   // Cargar la página principal de la aplicación desde desarrollo con vite
-  mainWindow.loadURL('http://localhost:5173/')
+  // mainWindow.loadURL('http://localhost:5173/')
+
+  if (process.env.NODE_ENV === 'development') {
+    mainWindow.loadURL('http://localhost:5173')
+  } else {
+    mainWindow.loadFile(path.join(__dirname, '../app/dist', 'index.html'))
+  }
 
   // Manejar eventos de descarga
   setupDownloadHandler(mainWindow)

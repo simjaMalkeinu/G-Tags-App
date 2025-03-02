@@ -5,13 +5,19 @@
   "author": "Simja",
   "main": "./src/main/main.js",
   "scripts": {
-    "dev": "electron .",
-    "app:dir": "electron-builder --dir",
-    "app:dist": "electron-builder",
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
-    "build:css": "tailwindcss -i ./src/renderer/styles/tailwind.css -o ./src/renderer/styles/output.css --watch"
+    "dev:electron": "cross-env NODE_ENV=development electron .",
+    "dev:vite": "vite --config vite.config.js",
+    "dev": "concurrently \"pnpm run dev:vite\" \"pnpm run dev:electron\"",
+    "stg": "concurrently \"pnpm run dev:vite\" \"pnpm run dev:electron\"",
+    "start": "cross-env electron .",
+    "start:electron": "electron-forge start",
+    "package:electron": "electron-forge package",
+    "make:electron": "electron-forge make",
+    "build": "vite build && electron-builder",
+    "build:vite": "vite build",
+    "build:dist": "electron-builder",
+    "build:app": "electron-builder --dir",
+    "build:css": "tailwindcss -i ./src/app/css/tailwind.css -o ./src/app/css/output.css --watch"
   },
   "build": {
     "appId": "com.simjasprojects.com",
@@ -42,20 +48,23 @@
   "keywords": [],
   "license": "ISC",
   "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
     "concurrently": "^9.1.2",
     "electron": "^26.6.10",
     "electron-builder": "^25.1.8",
     "postcss": "^8.5.3",
     "standard": "^17.1.2",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "vite": "^6.2.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
-    "@heroui/react": "^2.7.4",
     "electron-updater": "^6.3.9",
     "framer-motion": "^12.4.7",
     "materialize-css": "^1.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "sqlite3": "^5.1.7",
     "tailwind-scrollbar": "^3.1.0"
   },
@@ -64,7 +73,6 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "@heroui/shared-utils",
       "electron",
       "sqlite3"
     ]

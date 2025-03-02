@@ -1,9 +1,8 @@
-const { heroui } = require('@heroui/react')
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './src/renderer/**/*.{html,js}', // Rutas donde se usa Tailwind
+    './src/renderer/**/*.{html,js,ts,jsx,tsx}', // Rutas donde se usa Tailwind
+    './src/app/**/*.{html,js,ts,jsx,tsx}', // Rutas donde se usa Tailwind
     './src/main/**/*.{html,js}',
     './node_modules/@heroui/react/dist/**/*.{js,ts,jsx,tsx}' // Rutas de los componentes de HeroUI
   ],
@@ -19,7 +18,6 @@ module.exports = {
     }
   },
   plugins: [
-    require('tailwind-scrollbar')({ nocompatible: true }), // Plugin para scroll personalizado
-    heroui() // Plugin de HeroUI
+    require('tailwind-scrollbar')({ nocompatible: true }) // Plugin para scroll personalizado
   ]
 }

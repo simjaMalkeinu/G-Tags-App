@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { HeroUIProvider } from '@heroui/react';
 import App from './App';
 import './css/output.css';
+import './css/main.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
